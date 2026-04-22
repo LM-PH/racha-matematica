@@ -714,7 +714,8 @@ export default function App() {
     const saved = localStorage.getItem('user');
     if (saved) setUser(JSON.parse(saved));
 
-    // Sembrar ejercicios al iniciar la app
+    /* 
+    // Temporariamente desactivado para depurar bloqueo
     const init = async () => {
       try {
         await seedGrade2IfNeeded();
@@ -724,11 +725,12 @@ export default function App() {
       }
     };
     init();
+    */
   }, []);
 
   return (
     <Router>
-      <MusicPlayer />
+      {/* <MusicPlayer /> */}
       <Routes>
         <Route path="/" element={<Home onUserUpdate={setUser} />} />
         <Route path="/register" element={<Register onUserUpdate={setUser} />} />
