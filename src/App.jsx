@@ -156,8 +156,8 @@ const MusicPlayer = () => {
         }}
         style={{
           position: 'fixed',
-          top: '0.75rem',
-          right: 'calc(50% - 240px)',
+          bottom: '1.5rem',
+          right: '1.5rem',
           zIndex: 9999,
           background: muted ? '#F43F5E' : '#10B981',
           border: '3px solid white',
@@ -177,7 +177,8 @@ const MusicPlayer = () => {
         {!muted && (
           <div style={{
             position: 'absolute',
-            right: '55px',
+            bottom: '55px',
+            right: '0',
             background: 'white',
             color: '#10B981',
             fontSize: '0.7rem',
@@ -187,7 +188,7 @@ const MusicPlayer = () => {
             whiteSpace: 'nowrap',
             boxShadow: '0 2px 5px rgba(0,0,0,0.1)'
           }}>
-            MÚSICA ACTIVADA 🎶
+            MÚSICA ON 🎶
           </div>
         )}
       </button>
