@@ -87,6 +87,7 @@ async function seedGrade2IfNeeded() {
 const MusicPlayer = () => {
   const [muted, setMuted] = useState(false);
   const [currentTrack, setCurrentTrack] = useState('home');
+  const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
   const audioRef = React.useRef(null);
 
@@ -95,52 +96,49 @@ const MusicPlayer = () => {
     game: '/game.mp3'
   };
 
-  // Monitor de ruta para cambiar track
   useEffect(() => {
     const isGame = location.pathname.includes('/game/');
     const newTrack = isGame ? 'game' : 'home';
     if (newTrack !== currentTrack) {
       setCurrentTrack(newTrack);
+      setIsLoading(true);
     }
   }, [location.pathname, currentTrack]);
 
-  // Manejo de reproducción y autoplay
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
 
-    audio.volume = 0.15;
+    audio.volume = 0.20;
     
     const playAudio = () => {
       if (!muted) {
-        audio.play().catch(err => {
-          console.warn("Reproducción bloqueada: esperando interacción");
-        });
+        audio.play()
+          .then(() => setIsLoading(false))
+          .catch(() => setIsLoading(true));
       } else {
         audio.pause();
+        setIsLoading(false);
       }
     };
 
-    // Intentar reproducir al cambiar track o silencio
     playAudio();
 
-    // Escuchador de interacción para desbloquear audio
     const unlock = () => {
-      if (!muted) audio.play().catch(() => {});
+      if (!muted) audio.play().then(() => setIsLoading(false)).catch(() => {});
       window.removeEventListener('click', unlock);
-      window.removeEventListener('keydown', unlock);
+      window.removeEventListener('touchstart', unlock);
     };
 
     window.addEventListener('click', unlock);
-    window.addEventListener('keydown', unlock);
+    window.addEventListener('touchstart', unlock);
 
     return () => {
       window.removeEventListener('click', unlock);
-      window.removeEventListener('keydown', unlock);
+      window.removeEventListener('touchstart', unlock);
     };
   }, [muted, currentTrack]);
 
-  // Carga forzada al cambiar de pista
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.load();
@@ -153,7 +151,7 @@ const MusicPlayer = () => {
         ref={audioRef} 
         src={tracks[currentTrack]} 
         loop 
-        onError={() => console.warn("Archivo de audio no encontrado")}
+        onCanPlayAcross={() => setIsLoading(false)}
       />
       <button 
         onClick={() => setMuted(!muted)}
@@ -162,7 +160,7 @@ const MusicPlayer = () => {
           bottom: '1.5rem',
           right: '1.5rem',
           zIndex: 9999,
-          background: muted ? '#F43F5E' : '#10B981',
+          background: muted ? '#F43F5E' : (isLoading ? '#FBBF24' : '#10B981'),
           border: '3px solid white',
           width: '45px',
           height: '45px',
@@ -174,24 +172,24 @@ const MusicPlayer = () => {
           cursor: 'pointer',
           transition: 'all 0.3s'
         }}
-        className={muted ? 'pulse-button' : ''}
+        className={(muted || isLoading) ? 'pulse-button' : ''}
       >
         {muted ? <VolumeX size={20} color="white" /> : <Volume2 size={20} color="white" />}
-        {!muted && (
+        {!muted && !isLoading && (
           <div style={{
-            position: 'absolute',
-            bottom: '55px',
-            right: '0',
-            background: 'white',
-            color: '#10B981',
-            fontSize: '0.7rem',
-            padding: '4px 8px',
-            borderRadius: '8px',
-            fontWeight: 800,
-            whiteSpace: 'nowrap',
+            position: 'absolute', bottom: '55px', right: '0', background: 'white', color: '#10B981',
+            fontSize: '0.7rem', padding: '4px 8px', borderRadius: '8px', fontWeight: 800, whiteSpace: 'nowrap',
             boxShadow: '0 2px 5px rgba(0,0,0,0.1)'
           }}>
             MÚSICA ON 🎶
+          </div>
+        )}
+        {isLoading && !muted && (
+          <div style={{
+            position: 'absolute', bottom: '55px', right: '0', background: '#FBBF24', color: 'white',
+            fontSize: '0.6rem', padding: '4px 8px', borderRadius: '8px', fontWeight: 800, whiteSpace: 'nowrap'
+          }}>
+            CARGANDO...
           </div>
         )}
       </button>
