@@ -87,7 +87,6 @@ async function seedGrade2IfNeeded() {
 const MusicPlayer = () => {
   const [muted, setMuted] = useState(false);
   const [currentTrack, setCurrentTrack] = useState('home');
-  const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
   const audioRef = React.useRef(null);
 
@@ -101,97 +100,57 @@ const MusicPlayer = () => {
     const newTrack = isGame ? 'game' : 'home';
     if (newTrack !== currentTrack) {
       setCurrentTrack(newTrack);
-      setIsLoading(true);
     }
-  }, [location.pathname, currentTrack]);
+  }, [location.pathname]);
 
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
-
-    audio.volume = 0.20;
+    audio.volume = 0.15;
     
-    const playAudio = () => {
-      if (!muted) {
-        audio.play()
-          .then(() => setIsLoading(false))
-          .catch(() => setIsLoading(true));
-      } else {
-        audio.pause();
-        setIsLoading(false);
-      }
+    if (!muted) {
+      audio.play().catch(() => {
+        console.log("Autoplay blocked, waiting for interaction");
+      });
+    } else {
+      audio.pause();
+    }
+
+    const unblock = () => {
+      if (!muted) audio.play().catch(() => {});
+      window.removeEventListener('click', unblock);
     };
-
-    playAudio();
-
-    const unlock = () => {
-      if (!muted) audio.play().then(() => setIsLoading(false)).catch(() => {});
-      window.removeEventListener('click', unlock);
-      window.removeEventListener('touchstart', unlock);
-    };
-
-    window.addEventListener('click', unlock);
-    window.addEventListener('touchstart', unlock);
-
-    return () => {
-      window.removeEventListener('click', unlock);
-      window.removeEventListener('touchstart', unlock);
-    };
+    window.addEventListener('click', unblock);
+    return () => window.removeEventListener('click', unblock);
   }, [muted, currentTrack]);
 
   useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.load();
-    }
+    if (audioRef.current) audioRef.current.load();
   }, [currentTrack]);
 
   return (
     <>
-      <audio 
-        ref={audioRef} 
-        src={tracks[currentTrack]} 
-        loop 
-        onCanPlayAcross={() => setIsLoading(false)}
-      />
+      <audio ref={audioRef} src={tracks[currentTrack]} loop />
       <button 
         onClick={() => setMuted(!muted)}
         style={{
           position: 'fixed',
-          bottom: '1.5rem',
-          right: '1.5rem',
+          top: '1rem',
+          right: '1rem',
           zIndex: 9999,
-          background: muted ? '#F43F5E' : (isLoading ? '#FBBF24' : '#10B981'),
-          border: '3px solid white',
-          width: '45px',
-          height: '45px',
-          borderRadius: '25px',
+          background: muted ? '#F43F5E' : '#10B981',
+          border: '2px solid white',
+          width: '40px',
+          height: '40px',
+          borderRadius: '20px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          boxShadow: '0 4px 15px rgba(0,0,0,0.3)',
-          cursor: 'pointer',
-          transition: 'all 0.3s'
+          boxShadow: '0 2px 10px rgba(0,0,0,0.2)',
+          cursor: 'pointer'
         }}
-        className={(muted || isLoading) ? 'pulse-button' : ''}
       >
-        {muted ? <VolumeX size={20} color="white" /> : <Volume2 size={20} color="white" />}
-        {!muted && !isLoading && (
-          <div style={{
-            position: 'absolute', bottom: '55px', right: '0', background: 'white', color: '#10B981',
-            fontSize: '0.7rem', padding: '4px 8px', borderRadius: '8px', fontWeight: 800, whiteSpace: 'nowrap',
-            boxShadow: '0 2px 5px rgba(0,0,0,0.1)'
-          }}>
-            MÚSICA ON 🎶
-          </div>
-        )}
-        {isLoading && !muted && (
-          <div style={{
-            position: 'absolute', bottom: '55px', right: '0', background: '#FBBF24', color: 'white',
-            fontSize: '0.6rem', padding: '4px 8px', borderRadius: '8px', fontWeight: 800, whiteSpace: 'nowrap'
-          }}>
-            CARGANDO...
-          </div>
-        )}
+        {muted ? <VolumeX size={18} color="white" /> : <Volume2 size={18} color="white" />}
       </button>
     </>
   );
