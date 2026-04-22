@@ -1,0 +1,1295 @@
+
+
+# FILE: Pitagoras-cuadernillo.pdf
+
+## PAGE 1
+ 
+ 
+El Teorema de Pitágoras 
+ 
+ 
+ 
+ 
+Cuaderno de ejercicios 
+Matemáticas JRM 
+ 
+Nombre y apellidos ……………………………………......  
+ 
+  
+
+## PAGE 2
+El Teorema de Pitágoras. Página 2   
+ 
+Índice de contenidos. 
+ 
+ 
+1. Comprobación del teorema de Pitágoras. 
+ 
+2. Cálculo de un lado en un triángulo rectángulo. 
+ 
+3. Cálculo de longitudes en una figura plana. 
+ 
+4. Cálculo de longitudes y distancias en el plano. 
+ 
+5. Cálculo de longitudes en un cuerpo. 
+ 
+6. Ecuaciones asociadas al teorema de Pitágoras. 
+ 
+  
+## PAGE 3
+El Teorema de Pitágoras. Página 3  RESUMEN  DE OBJETIVOS  
+ 
+ 
+1. Comprobación del teorema de Pitágoras. 
+ 
+ 
+ 
+                                                     
+ 
+• Conocer el teorema de Pitágoras y saber sobre qué t ipo de 
+triángulos se puede aplicar. 
+ 
+ 
+ 
+• Determinar si una terna de medidas construye o no un t riángulo 
+rectángulo, obtusángulo o acutángulo.  
+ 
+ 
+ 
+ 
+ 
+2. Cálculo de un lado en un triángulo rectángulo. 
+ 
+ 
+ 
+  
+ 
+• Saber utilizar el teorema de Pitágoras para calcular  el cateto o la 
+hipotenusa de un triángulo rectángulo en el que cono cemos dos de 
+sus lados. 
+ 
+ 
+ 
+ 
+3. Cálculo de longitudes en una figura plana. 
+ 
+ 
+  
+ 
+• Saber determinar triángulos rectángulos en distintas figuras del 
+plano para calcular, a través de Pitágoras, ciertas  medidas 
+desconocidas, asociadas a las figuras. 
+ 
+ 
+  
+## PAGE 4
+El Teorema de Pitágoras. Página 4   
+ 
+ 
+4. Cálculo de longitudes y distancias en el plano. 
+ 
+ 
+  
+ 
+• Saber utilizar las acotaciones de los ejes cartesian os para conocer 
+directamente medidas horizontales y verticales que pe rmitan 
+calcular la medida de segmentos oblicuos. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+5. Cálculo de longitudes en un cuerpo. 
+ 
+ 
+  
+ 
+• Saber determinar triángulos rectángulos en distintos cuerpos del 
+espacio para calcular, a través de Pitágoras, cierta s medidas 
+desconocidas asociadas a esos cuerpos. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+6. Ecuaciones asociadas al teorema de Pitágoras. 
+ 
+ 
+  
+ 
+• Saber plantear y resolver ecuaciones asociadas a un triángulo 
+rectángulo, aplicando adecuadamente el teorema de pi tágoras. 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+
+## PAGE 5
+El Teorema de Pitágoras. Página 5  1. Comprobación del teorema de Pitágoras. 
+ 
+Ejercicio 1.   Calcula el cuadrado de los tres lados de estos triá ngulos y comprueba en cuál de 
+ellos de cumple el teorema de Pitágoras. 
+   
+1) 2) 3) 
+ 
+ 
+ 
+   
+   
+ 
+Ejercicio 2.   Calcula el cuadrado de los tres lados de estos triá ngulos rectángulos y 
+comprueba en cada caso que se cumple el Teorema de Pitágoras. 
+   
+1) 2) 3) 
+ 
+ 
+  
+   
+   
+  
+
+## PAGE 6
+El Teorema de Pitágoras. Página 6   
+Ejercicio 3.   Calcula el cuadrado de los tres lados de estos triá ngulos y comprueba que 
+ninguno de ellos cumple el Teorema de Pitágoras. 
+   
+1) 2) 3) 
+ 
+ 
+  
+   
+   
+ 
+Ejercicio 4.   En cada uno de los siguientes casos, se facilita la  medida de los tres lados de un 
+triángulo. Determina cuáles de ellos son rectángulo s, obtusángulos o acutángulos. 
+   
+1) 2) 3) 
+12cm,   16cm  y  20cm 13m,   12m  y  10m 5cm,  10cm  y 6cm 
+4) 5) 6) 
+8mm,   5mm  y  5mm 11m,   61m  y  60m 40cm,  41cm y  9cm 
+  
+
+## PAGE 7
+El Teorema de Pitágoras. Página 7  2. Cálculo de un lado en un triángulo rectángulo. 
+ 
+ 
+Ejercicio 5.  Halla la medida, en metros, de la 
+hipotenusa de un triángulo rectángulo, cuyos cateto s 
+miden 3 y 4 metros.  
+Ejercicio 6.  Halla la medida, en centímetros, de la 
+hipotenusa de un triángulo rectángulo, cuyos cateto s 
+miden 5 y 12 centímetros. 
+  
+  
+   
+  
+  
+Solución:  h=5m Solución:  h= 13cm 
+ 
+ 
+Ejercicio 7.  Halla la medida, en centímetros, del cateto 
+desconocido de un triángulo rectángulo, cuya 
+hipotenusa mide 10 cm y el cateto conocido mide 8 c m.  
+Ejercicio 8.  Halla la medida, en metros, del cateto 
+desconocido de un triángulo rectángulo, cuya hipote nusa 
+mide 17 metros y el cateto conocido mide 15 metros.  
+ 
+  
+ 
+Solución: b=6cm Solución: c=8m 
+  
+
+## PAGE 8
+El Teorema de Pitágoras.   
+Ejercicio 9.  Una escalera de 65 decímetros se apoya en 
+una pared vertical de modo que el pie de la escalera está 
+a 25 decímetros de la pared. ¿Qué altura, en decíme tros 
+alcanza la escalera? 
+   
+   
+ 
+Solución: h=60dm 
+ 
+ 
+Ejercicio 11.  Una letra “N” se ha construido con tres 
+listones de madera; los listones verticales son 20 cm y 
+están separado 15 cm. ¿Cuánto mide el listón diagon al? 
+ 
+   
+Solución: 25cm 
+  
+Una escalera de 65 decímetros se apoya en 
+modo que el pie de la escalera está 
+a 25 decímetros de la pared. ¿Qué altura, en decíme tros  
+Ejercicio 10.  Una escalera de 15 metros se apoya en una 
+pared vertical, de modo que el pie de la escalera s e 
+encuentra a 9 metros de esa pared. Calcula la altur a 
+metros, que alcanza la escalera sobre la pared. 
+Solución: a=12m 
+Una letra “N” se ha construido con tres 
+listones de madera; los listones verticales son 20 cm y 
+están separado 15 cm. ¿Cuánto mide el listón diagon al?   
+Ejercicio 12.  Una escalera de bomberos de 14,5 metros de 
+longitud se ap oya en la fachada de un edificio, poniendo el 
+pie de la escalera a 10 metros del edificio. ¿Qué a ltura, en 
+metros, alcanza la escalera?  
+Solución: 10,5m 
+Página 8  Una escalera de 15 metros se apoya en una 
+pared vertical, de modo que el pie de la escalera s e 
+encuentra a 9 metros de esa pared. Calcula la altur a , en 
+que alcanza la escalera sobre la pared.  
+ 
+Una escalera de bomberos de 14,5 metros de 
+oya en la fachada de un edificio, poniendo el 
+pie de la escalera a 10 metros del edificio. ¿Qué a ltura, en 
+ 
+ 
+ 
+
+## PAGE 9
+El Teorema de Pitágoras. Página 9   
+Ejercicio 13.  Halla la medida en centímetros, de la 
+diagonal de un cuadrado cuyo lado mide 10 cm.  
+Ejercicio 14.  Halla la medida, en centímetros, de la altura 
+de un rectángulo, cuya base mide 35 cm y su diagona l 37 
+cm: 
+  
+  
+   
+  
+  
+Solución: 14,14cm Solución:  x=12m 
+ 
+ 
+Ejercicio 15.  Una rampa de una carretera avanza 60 
+metros en horizontal para subir 11 metros en vertic al. 
+Calcula cuál es la longitud de la carretera.  
+Ejercicio 16.  El dormitorio de Pablo es rectangular, y sus 
+lados miden 3 y 4 metros. Ha decidido dividirlo en dos 
+partes triangulares con una cortina que une dos vér tices 
+opuestos. ¿Cuántos metros deberá medir la cortina? 
+  
+ 
+Solución:  61m Solución:  5m 
+  
+## PAGE 10
+El Teorema de Pitágoras. Página 10   
+Ejercicio 17.  Las dimensiones de un rectángulo son: 
+base=24 m y altura=10m. Calcula la longitud de su 
+diagonal y expresa el resultado en centímetros.  
+Ejercicio 18.  Utiliza el teorema de Pitágoras para hallar la 
+altura de un triángulo isósceles cuya base mide 10 
+centímetros y sus lados iguales 13 centímetros. 
+ 
+ 
+ 
+Solución: 2600cm Solución:  12cm 
+ 
+ 
+Ejercicio 19.  La cara frontal de una tienda de campaña 
+es un triángulo isósceles cuya base mide 1,6 metros  y 
+cada uno de los lados iguales mide 170 centímetros.  
+Calcula la altura en centímetros de esa tienda de 
+campaña.  
+Ejercicio 20.  Calcula la medida, en decímetros, de cada 
+lado de un rombo, sabiendo que sus diagonales miden  12 y 
+16 decímetros.  
+ 
+  
+ 
+Solución: 150cm Solución: 10 dm 
+  
+## PAGE 11
+El Teorema de Pitágoras. Página 11   
+Ejercicio 21. Una escalera de 65 decímetros está 
+apoyada en una pared vertical a 52 decímetros del 
+suelo. ¿A qué distancia se encuentra de la pared el  pie 
+de la escalera?  
+Ejercicio 22.  En un rectángulo de altura 4 cm la diagonal es 
+de 5,8 cm. ¿Cuánto mide la base del rectángulo?  
+ 
+  
+ 
+Solución: d=39dm Solución: a=4,2cm 
+ 
+ 
+Ejercicio 23.  En un triángulo isósceles y rectángulo, los 
+catetos miden 25 milímetros cada uno, ¿Cuál es la 
+medida de su hipotenusa?  
+Ejercicio 24.  Una rampa tiene una longitud horizontal de 
+84 kilómetros y un altura de 13 km. ¿Cuál es la lon gitud de 
+la rampa?  
+ 
+  
+ 
+Solución: 35,36mm Solución: h=85km 
+  
+
+## PAGE 12
+El Teorema de Pitágoras. Página 12   
+Ejercicio 25.  Un faro de 16 metros de altura manda su 
+luz a una distancia horizontal sobre el mar de 63 m etros. 
+¿Cuál es la longitud, en metros, del haz de luz?  
+Ejercicio 26.  Desde un balcón de un castillo en la playa se 
+ve un barco a 85 metros, cuando realmente se encuen tra a 
+84 metros del castillo. ¿A qué altura se encuentra ese 
+balcón?  
+ 
+  
+ 
+Solución: h=65m Solución: a=13m 
+ 
+ 
+Ejercicio 27.  Si nos situamos a 120 metros de distancia 
+de un cohete, la visual al extremo superior del mis mo 
+recorre un total de 130 metros. ¿Cuál es la altura total 
+del cohete?  
+Ejercicio 28.  Si nos situamos a 150 metros de distancia de 
+un rascacielos, la visual al extremo superior del m ismo 
+recorre un total de 250 metros. ¿Cuál es la altura total del 
+rascacielos?  
+ 
+ 
+ 
+ 
+Solución: 50m Solución: h=200m 
+  
+## PAGE 13
+El Teorema de Pitágoras. Página 13   
+Ejercicio 29.  Un coche que se desplaza desde el punto 
+A hasta el punto B recorre una distancia horizontal  de 35 
+metros, mientras se eleva una altura de 12 metros. 
+¿Cuál es la distancia, en metros, que separa a los puntos 
+A y B?  
+Ejercicio 30.  Un guardacostas observa un barco desde una 
+altura de 28 metros. El barco está a una distancia horizontal 
+del punto de observación de 45 metros. ¿Cuál es la 
+longitud, en metros, de la visual del guardacostas al barco?  
+ 
+  
+ 
+Solución: AB=37m Solución: d=53m 
+ 
+ 
+Ejercicio 31.  Desde un acantilado de 200 metros de 
+altura se observa un barco que se encuentra a 210 
+metros de dicho acantilado. ¿Qué distancia, en metr os, 
+recorre la visual desde el acantilado hasta el barc o?  
+Ejercicio 32.  La altura de una portería de fútbol 
+reglamentaria es de 2,4 metros y la distancia desde  el 
+punto de penalti hasta la raya de gol es de 10,8 me tros. 
+¿Qué distancia recorre un balón que se lanza desde el 
+punto de penalti y se estrella en el punto central del 
+larguero?  
+ 
+ 
+ 
+ 
+Solución: d=290m Solución: d=11,06m 
+  
+## PAGE 14
+El Teorema de Pitágoras. Página 14   
+Ejercicio 33.  En una rampa inclinada, un ciclista avanza 
+una distancia real de 85 metros mientras avanza una  
+distancia horizontal de tan solo 77 metros. ¿Cuál e s la 
+altura, en metros, de esa rampa?  
+Ejercicio 34.  Una cometa está atada al suelo con un cordel 
+de 200 metros de longitud. Cuando la cuerda está 
+totalmente tensa, la vertical de la cometa al suelo  está a 
+160 metros del punto donde se ató la cometa. ¿A qué  
+altura está volando la cometa?  
+ 
+  
+ 
+Solución: a=36m Solución: x=120m 
+ 
+ 
+Ejercicio 35.  La Torre de Pisa está inclinada de modo 
+que su pared lateral forma un triángulo rectángulo de 
+catetos 5 metros y 60 metros. ¿Cuánto mide la pared  
+lateral?  
+Ejercicio 36.  Un compás de bigotera tiene separadas las 
+puntas de sus patas 100 milímetros, mientras que la  vertical 
+desde el eje hasta el papel alcanza una altura de 1 20 
+milímetros. ¿Cuál es la medida, en milímetros, de c ada una 
+de sus patas?  
+ 
+  
+ 
+Solución:  x=60,21m Solución: 109,09mm 
+  
+## PAGE 15
+El Teorema de Pitágoras. Página 15  3. Cálculo de longitudes en una figura plana. 
+ 
+Ejercicio 37.  Halla la medida de la altura de un trapecio 
+rectángulo, cuya base mayor mide 28 metros, su base  
+menor 20 metros y su lado oblicuo 17 metros: Ejercicio 38.  Halla la medida de la altura de un triángulo 
+isósceles cuya base mide 1 decímetro y sus lados ig uales 13 
+centímetros. 
+ 
+  
+ 
+Solución: x=15m Solución: x=12cm 
+ 
+Ejercicio 39.  El dormitorio de Pablo es rectangular; su lado 
+mayor mide 8 metros y su perímetro total mide 28 me tros. Ha 
+decidido dividirlo en dos partes triangulares con u na cortina 
+que une dos vértices opuestos. ¿Cuántos metros debe rá 
+medir la cortina? Ejercicio 40.  Halla la altura de un trapecio isósceles de bases 4  
+y 6 centímetros, y lados iguales de 5 centímetros. 
+ 
+ 
+     
+ 
+Solución: 10m Solución: 4,90 cm 
+  
+## PAGE 16
+El Teorema de Pitágoras. Página 16  Ejercicio 41.  Halla la medida de la altura de un 
+triángulo equilátero de 8 cm de lado. Ejercicio 42. Calcula la medida de cada lado de un rombo, 
+sabiendo que sus diagonales miden 12 y 16 centímetr os.  
+  
+ 
+Solución: 6,93cm Solución: x=10cm 
+ 
+Ejercicio 43.  El la figura se ve la planta de un rascacielos. Es 
+un trapecio rectangular. Calcula la medida del lado  oblicuo. Ejercicio 44.  Calcula la apotema de un hexágono regular de 10 
+centímetros de lado. 
+ 
+  
+ 
+Solución: 10m Solución: a=8,66cm 
+  
+## PAGE 17
+El Teorema de Pitágoras. Página 17  Ejercicio 45. Calcula el lado de un triángulo equilátero 
+inscrito en una circunferencia de radio 8 cm, como la de la 
+figura.  Ejercicio 46.  Calcula el perímetro de este trapecio rectángulo. 
+ 
+ 
+ 
+Solución: 13,86cm Solución: P=20cm 
+ 
+Ejercicio 47.  En un triángulo equilátero de 10 centímetros 
+de lado se inscribe una circunferencia. Calcula el radio de la 
+circunferencia, sabiendo que es la tercera parte de  la altura 
+del triángulo. Ejercicio 48.  Calcula el perímetro de este trapecio isósceles. 
+ 
+ 
+Solución: r=2,89cm Solución: P=56cm 
+  
+
+## PAGE 18
+El Teorema de Pitágoras. Página 18  Ejercicio 49.  Halla la medida de los lados desconocidos x e y 
+ 
+ 
+Solución: x=15m;  y=12m 
+ 
+Ejercicio 50.  Calcula la medida de la diagonal de un trapecio isó sceles con base mayor 10 centímetros, base menor 6 
+centímetros y lados oblicuos 6 centímetros.  
+ 
+ 
+Solución: d=9.80cm 
+  
+## PAGE 19
+El Teorema de Pitágoras. Página 19  Ejercicio 51.  En un cuadrado de lado 10 centímetros se inscribe otro más pequeño que apoya sus vértices en los punt os medios 
+de los lados del cuadrado mayor. ¿Cuál es el períme tro del cuadrado menor? 
+ 
+ 
+Solución: P=28.28cm 
+ 
+Ejercicio 52.  Halla el perímetro del trapecio de la figura. 
+ 
+ 
+Solución: P=86cm 
+  
+
+## PAGE 20
+El Teorema de Pitágoras. Página 20  Ejercicio 53.  Halla el perímetro, en metros, del triángulo de la figura.  
+ 
+ 
+Solución: P=24m 
+ 
+Ejercicio 54.   Se dispone de un pentágono regular inscrito en una circunferencia de radio 3,75cm y apotema 3 cm. Sobr e uno de 
+sus lados se construye un triángulo equilátero. ¿Cu ál es la altura, en milímetros, de ese triángulo eq uilátero? 
+ 
+ 
+Solución: a=39.0mm 
+  
+
+## PAGE 21
+El Teorema de Pitágoras. Página 21  Ejercicio 55.  ¿Cuál es el perímetro, en centímetros, del triángul o de la figura?  
+ 
+ 
+Solución: P=280cm 
+ 
+Ejercicio 56.  ¿Cuál es la distancia entre los puntos R y P?  
+ 
+ 
+Solución: PR=14,53cm 
+  
+## PAGE 22
+El Teorema de Pitágoras. Página 22  Ejercicio 57.  En unas fiestas populares se ha colgado una estrell a navideña en el centro de una cuerda sujeta entre dos portes de 
+12 metros de altura, como se muestra en la figura ¿ Cuál es la distancia entre el suelo y la estrella?  
+ 
+ 
+Solución: 3m 
+ 
+Ejercicio 58.  Una gran antena de radio, de 50 metros de longitud,  se ha anclado al suelo verticalmente, mediante cua tro cables 
+sujetos a los puntos A, B C y D, como se indica en la figura. ¿Cuál es la longitud total, en metros, d e los cables utilizados? 
+ 
+ 
+Solución: 251, 16 m 
+  
+## PAGE 23
+El Teorema de Pitágoras. Página 23  4. Cálculo de longitudes y distancias en el plano. 
+ 
+Ejercicio 59.   Halla la medida del segmento AB.  
+ 
+ 
+Solución: 5 unidades 
+ 
+Ejercicio 60.   Halla la distancia que separa los puntos A y B.  
+ 
+ 
+Solución: 10 unidades 
+ 
+Ejercicio 61.   Halla la medida del segmento AB.  
+ 
+ 
+Solución: 4,12 unidades 
+  
+## PAGE 24
+El Teorema de Pitágoras. Página 24  Ejercicio 62.   Halla la medida de los tres lados de este triángu lo. ¿Es un triángulo isósceles?  
+ 
+ 
+Solución: 6u; 5u y 5u. Si es isósceles 
+ 
+Ejercicio 63.   Halla la medida de los lados AB y AC, en este tri ángulo ABC.  
+ 
+ 
+Solución: AB=13,54u ; AC=41u. 
+ 
+Ejercicio 64.   Halla la medida de los dos lados oblicuos en este  trapecio. ¿Es un trapecio escaleno?  
+ 
+ 
+Solución: AB=3,61u ; CD=3,16u. 
+  
+## PAGE 25
+El Teorema de Pitágoras. Página 25  Ejercicio 65.   Si un móvil se desplaza desde A hasta D, siguiend o la trayectoria del polígono ABCD, ¿qué 
+distancia recorre?  
+ 
+ 
+Solución: AB=BC=CD=5 unidades;  D=15 unidades. 
+ 
+Ejercicio 66.  Aunque este triángulo, dibujado sobre una trama cu adrada, parece equilátero, en realidad, no 
+lo es. Encuentra la medida de cada lado para confir mar que no son las tres iguales.  
+ 
+ 
+Solución: AB=10u; BC=CA=10,3u; No es equilátero 
+  
+## PAGE 26
+El Teorema de Pitágoras. Página 26  Ejercicio 67.   Aunque hexágono, dibujado sobre una trama cuadrad a, parece un hexágono regular, en 
+realidad, no lo es. Encuentra la medida de cada lad o para confirmar que no son las seis iguales.  
+ 
+ 
+Solución: AB=ED=5u ; BC=CD=EF=FA=5,83u. 
+ 
+Ejercicio 68.  ¿Cuál es el perímetro, en metros, de la figura dibu jada sobre esta trama cuadrada de lado unidad?  
+ 
+ 
+ 
+Solución: P=16,89m. 
+  
+
+## PAGE 27
+El Teorema de Pitágoras. Página 27  5. Cálculo de longitudes en un cuerpo. 
+ 
+Ejercicio 69.  Halla la medida de la diagonal de la base (x) y la medida de la diagonal del ortoedro (y)  
+ 
+ 
+ 
+Solución: x=15cm; y=17cm. 
+ 
+Ejercicio 70. Vicente ha comprado una caña de pescar de 3,25 metr os de largo. Cuando llega a su casa intenta meterla  
+en el ascensor, cuyas medidas son 1,5 metros de anc ho, 1,8 metros de fondo y 2,3 metros de alto. ¿Cons eguirá su 
+propósito sin doblar la caña?  
+ 
+ 
+Solución: x=2,34m; y=3,28m; La caña cabe sin ser do blada. 
+  
+## PAGE 28
+El Teorema de Pitágoras. Página 28  Ejercicio 71.  ¿Es posible guardar una regla de madera de 35 centí metros en una caja con forma cúbica de 20 
+centímetros de lado, sin que sobresalga nada?  
+ 
+ 
+Solución: x=28,28cm; y=34,64; No cabe la regla sin que sobresalga de la caja. 
+ 
+Ejercicio 72.  Calcula la medida de la diagonal de un trapecio isó sceles con base mayor 10 centímetros, base menor 6 
+centímetros y lados oblicuos 6 centímetros.  
+ 
+ 
+Solución: d=9,79cm 
+  
+## PAGE 29
+El Teorema de Pitágoras. Página 29  Ejercicio 73.  En un cubo de 6 centímetros de arista se inscribe u n rombo ABCD, apoyando sus vértices B y D sobre los  
+puntos medios de dos aristas opuestas. Halla la med ida, en centímetros, de cada uno de los lados del r ombo.  
+ 
+ 
+Solución: AB=BC=CD=DA=6,71cm 
+ 
+Ejercicio 74 . En un cubo de 6 centímetros de arista se inscribe u n trapecio, apoyando su base menor sobre los puntos  
+medios de dos aristas consecutivas. Halla el períme tro, en milímetros, de ese trapecio.  
+ 
+ 
+Solución: Base mayor=84,9mm; Base menor=42,4mm; Lad os oblicuos=67,1mm; Perímetro=261,5mm 
+  
+
+## PAGE 30
+El Teorema de Pitágoras. Página 30  Ejercicio 75.   Calcula la distancia, en milímetros, entre los punt os A y B en un prisma recto de base cuadrada, siend o el 
+lado de la base de 8 cm y la altura del prisma de 1 2cm.  
+ 
+ 
+Solución:  AB=132,7mm 
+ 
+Ejercicio 76.  En un prisma recto, de altura 15 cm, la base es un triángulo equilátero de lado 10 cm. En él se han 
+marcado un vértice A y el centro B de la cara opues ta. ¿Cuál es la distancia, en milímetros, entre los  puntos A y B?  
+ 
+ 
+Solución:  AB=160,7mm 
+  
+## PAGE 31
+El Teorema de Pitágoras. Página 31  Ejercicio 77.  En una pirámide recta de base cuadrada de lado 10 cm y altura 12 cm, ¿cuál es la medida en 
+centímetros de cada arista no básica?  
+ 
+ 
+Solución: VB=13,93cm 
+ 
+Ejercicio 78.  En un cono recto de altura h y generatriz g, ¿cuál es la expresión del radio r de la base, en función de h y g?  
+ 
+ 
+Solución:   /g1870/g3404/g3493/g1859/g2870/g3398/g1860/g2870 
+  
+
+## PAGE 32
+El Teorema de Pitágoras. Página 32  Ejercicio 79.  ¿Cuántos centímetros mide la diagonal principal de l ortoedro de la figura?  
+ 
+ 
+Solución: 15,81cm 
+ 
+Ejercicio 80.  En un cubo de arista 10 cm, se inscribe un octaedr o con sus vértices apoyados en el centro de 
+cada una de las caras del cubo. Calcula la altura, en centímetros, de cada una de las caras del octaed ro.  
+ 
+ 
+Solución:  6,12cm 
+  
+
+## PAGE 33
+El Teorema de Pitágoras.  Ejercicio 81.   ¿Qué área mide la rampa inclinada? 
+ 
+Solución:  20u 2 
+ 
+Ejercicio 82.  En el prisma oblicuo de la figura, ¿Qué distancia h ay entre 
+ 
+Solución: BA’=24cm 
+  
+¿Qué área mide la rampa inclinada?  
+ 
+En el prisma oblicuo de la figura, ¿Qué distancia h ay entre los puntos B y A’ 
+ 
+Página 33  los puntos B y A’ ? 
+## PAGE 34
+El Teorema de Pitágoras.  Ejercicio 83.   El prisma recto de la figura tiene por base un hexá gono regular de radio 4cm. La altura del 
+prisma es de 15 cm. ¿Cuál es la distancia entre los  vértices A y J? 
+ 
+ 
+Solución: AJ=17cm 
+ 
+Ejercicio 84.  El cilindro de la figura representa un bote para lá pices. ¿Cuál es la medida del mayor lápiz que 
+cabe en el bote sin sobresalir del mismo? 
+ 
+Solución: 19,80cm 
+  
+El prisma recto de la figura tiene por base un hexá gono regular de radio 4cm. La altura del 
+prisma es de 15 cm. ¿Cuál es la distancia entre los  vértices A y J?  
+El cilindro de la figura representa un bote para lá pices. ¿Cuál es la medida del mayor lápiz que 
+cabe en el bote sin sobresalir del mismo?  
+ 
+Página 34  El prisma recto de la figura tiene por base un hexá gono regular de radio 4cm. La altura del 
+El cilindro de la figura representa un bote para lá pices. ¿Cuál es la medida del mayor lápiz que 
+## PAGE 35
+El Teorema de Pitágoras. Página 35  6. Ecuaciones asociadas al teorema de Pitágoras. 
+ 
+Ejercicio 85.  La altura de un triángulo equilátero mide 8 centím etros. Calcula la medida, en milímetros, de su 
+perímetro.  
+ 
+   
+  
+Solución: P=27,72cm 
+ 
+Ejercicio 86.  Calcula el lado de un cuadrado inscrito en una cir cunferencia de 7 centímetros de radio.  
+ 
+  
+  
+Solución: x=9.899cm 
+  
+## PAGE 36
+El Teorema de Pitágoras. Página 36  Ejercicio 87.  Calcula el radio r de una circunferencia inscrita en un cuadrado de 15 centímetros de diagonal.  
+ 
+  
+  
+ 
+Solución:  r=5,30cm 
+ 
+Ejercicio 88.  La distancia entre los puntos P y T es de 40 centí metros, la distancia entre P y R es 20cm y la 
+cuerda SR es  /g2872
+/g2871  del radio OS. ¿Cuál es el perímetro del triángulo  OSR?  
+ 
+ 
+Solución: P=100cm 
+  
+## PAGE 37
+El Teorema de Pitágoras. Página 37  Ejercicio 89.   En un triángulo rectángulo el cateto menor mide 5  metros; además, el cateto mayor y la 
+hipotenusa son números enteros consecutivos. ¿Cuál es el perímetro de este triángulo?  
+ 
+ 
+Solución: P=30m. 
+ 
+Ejercicio 90.   Halla el perímetro de un triángulo rectángulo cuy os lados son tres números consecutivos.  
+ 
+ 
+Solución: P=12u. 
+  
+## PAGE 38
+El Teorema de Pitágoras. Página 38  Ejercicio 91.   Una letra “N” se ha construido utilizando tres li stones con las medidas de la figura, dadas en 
+centímetros. Halla la longitud total de la madera q ue se ha utilizado.  
+ 
+ 
+Solución:  69cm 
+ 
+Ejercicio 92.   Sobre un acuario de cristal con forma de ortoedro  se conocen las medidas en centímetros 
+indicadas en la figura. ¿Cuál es la medida, en milí metros de la diagonal del ortoedro?  
+ 
+ 
+Solución: AB=1431,8mm. 
+  
+
+## PAGE 39
+El Teorema de Pitágoras. Página 39  Ejercicio 93.   En una pirámide recta de base cuadrada se conoce la relación que hay entre la arista de la base 
+(2x), la altura de la cara (2x+6) y la altura de la  pirámide (2x+4). ¿Cuál es la medida de la altura d e la cara?  
+ 
+ 
+Solución:  26cm 
+ 
+Ejercicio 94.   ¿Cuál es la distancia entre los puntos A y B?  
+ 
+ 
+Solución:  AB=37u. 
+  
+## PAGE 40
+El Teorema de Pitágoras. Página 40  Ejercicio 95.   Calcula la altura del cilindro desarrollado en la  figura.  
+ 
+ 
+Solución: 9u. 
+ 
+Ejercicio 96.   Calcula la altura de la pirámide, sabiendo que BC =13cm  
+ 
+ 
+Solución: AC=12cm 
+ 
+
+
+# FILE: 01.-Teorema-de-tales.pdf
+
+## PAGE 1
+ 
+Página 1 de 5 
+ 
+1 
+Nombre:__ ____ _______________________________3 º ESO  Acad émicas  
+ 
+ 
+ 
+ 
+Si las rectas a, b y c son paralelas y 
+cortan a otras dos rectas, r y r’, 
+entonces los segmentos que 
+determinan en ellos son 
+proporcionales:  
+ 
+𝐴𝐵̅̅̅̅
+𝐵𝐶̅̅̅̅=𝐴′𝐵′̅̅̅̅̅̅
+𝐵′𝐶′̅̅̅̅̅̅ 
+ 
+ 
+Ejemplo:  
+Las rectas a, b y c son paralelas. Halla la longitud de x.  
+  
+ 
+4
+10=𝑥
+14 
+ 
+ 
+𝑥= 4·14
+10=5,6 𝑐𝑚 
+ 
+  
+Teorema de Tales
+
+## PAGE 2
+ 
+Página 2 de 5 
+ 
+2 
+ 
+Ejercicios  
+1. Aplicando el teorema de Tales, calcula el valor de x . 
+ 
+(Sol: 3,2 cm)  
+ 
+2. Las baldas de la repisa representada en la figura son paralelas. Calcula el valor de x e y.  
+ 
+ 
+(Sol: x= 11,2 cm y =  10 cm)  
+  
+
+## PAGE 3
+ 
+Página 3 de 5 
+ 
+3 
+ 
+Dado un triángulo ABC , si se traza un segmento paralelo, B'C', a uno de los lados  del 
+triángulo, se obtiene otro triángulo  AB'C' , cuyos lados  son proporcionales  a los del 
+triángulo ABC . 
+ 
+ 
+ 
+ 
+𝐴𝐵
+̅
+̅
+̅
+̅
+𝐴𝐵
+′
+̅
+̅
+̅
+̅
+̅
+=
+𝐴
+𝐶
+̅
+̅
+̅
+̅
+𝐴
+𝐶
+′
+̅
+̅
+̅
+̅
+̅
+=
+𝐵
+𝐶
+̅
+̅
+̅
+̅
+𝐵
+′
+𝐶
+′
+̅
+̅
+̅
+̅
+̅
+̅
+ 
+ 
+ 
+Ejemplo  
+Hallar las medidas de los segmentos a y b.  
+  
+ 
+ 
+4
+2=6
+𝑏⇒𝑏=6·2
+4=3 𝑐𝑚 
+ 
+𝑎
+4=4
+2⇒𝑎=4·4
+2=8𝑐𝑚 
+ 
+Ejercicios  
+1. Usa el teorema de Tales para calcular x  
+ 
+  
+El Teorema de Tales en los triángulos
+
+## PAGE 4
+ 
+Página 4 de 5 
+ 
+4 
+ 
+2. Calcula los lados y el perímetro del siguiente triángulo:  
+ 
+ 
+3. Halla la altura del árbol de la figura:  
+ 
+ 
+4. ¿A qué altura se encuentra el extremo superior de la escultura, sabiendo que 
+Paula la ve alineada con el borde de la valla?  
+ 
+5. Calcula la altura de un edificio que proyecta una som bra de 49 metros en el 
+momento en que un poste de 2 metros arroja una sombra de 1,25 metros.  
+  
+
+## PAGE 5
+ 
+Página 5 de 5 
+ 
+5 
+ 
+6. Calcula el área de l siguiente hex ágono:  
+ 
+ 
+(Sol: 67 ,5 cm ) 
+ 
+7. Calcula el volumen de la siguiente figura:  
+ 
+ 
+(Sol: 400 cm3) 
+
+
+# FILE: teorema-tales.pdf
+
+## PAGE 1
+1 
+ EJERCICIOS TEOREMA DE TALES . 
+(soluciones en la página 3) 
+ 
+1.- Halla x e y en la siguiente figura:  
+ 
+ 
+ 
+2.- Calcula x (todas las medidas están en centímetros).  
+ 
+ 
+3.- Calcula x (las unidades son metros):  
+ 
+ 
+ 
+4.- Calcula x e y (las unidades son metros):  
+ 
+ 
+ 
+## PAGE 2
+2 
+  
+5.- Del siguiente dibujo conocemos: AC = 108 m, CE = 72 m, BF = 27 m. ¿Cuánto 
+miden BC y CF?  
+ 
+ 
+6.- Calcula x (las unidades son centímetros):  
+ 
+ 
+7.- Calcula x e y (las unidades son centímetros):  
+ 
+ 
+8.- Calcula x e y (las unidades son centímetros):  
+ 
+## PAGE 3
+3 
+  
+ 
+EJERCICIOS TEOREMA DE TALES : SOLUCIONES  
+ 
+1.- Halla x e y en la siguiente figura:  
+ 
+ 
+Solución:Aplicando el Teorema de Tales:  
+cm6,7523·4,5x23
+4,5x===    
+cm 10,114,57·6,5yy6,5
+74,5===
+ 
+ 
+2.- Calcula x (todas las medidas están en centímetros).  
+ 
+ 
+Solución:    
+cm7,523·5x5x
+23===  
+ 
+3.- Calcula x (las unidades son metros):  
+ 
+ 
+Solución:    
+m336·1,5xx6
+1,53===  
+ 
+ 
+ 
+ 
+ 
+## PAGE 4
+4 
+  
+ 
+4.- Calcula x e y (las unidades son metros):  
+ 
+ 
+Solución:  
+m268·1,5yy1,5
+86===
+ 
+m2,5610·1,5xx1,5
+106===
+ 
+ 
+5.- Del siguiente dibujo conocemos: AC = 108 m, CE = 72 m, BF = 27 m. ¿Cuánto 
+miden BC y CF?  
+ 
+ 
+Solución:    
+m813627·108x27BC
+72 108108===−         
+CF = 81 - 27 = 54 m  
+ 
+ 
+6.- Calcula x (las unidades son centímetros):  
+ 
+ 
+## PAGE 5
+5 
+ Solución:    
+cm1096·15xx15
+69===  
+7.- Calcula x e y (las unidades son centímetros):  
+ 
+ 
+Solución:    
+cm346·2yy6
+24===            
+cm824·4x4x
+24===  
+ 
+8.- Calcula x e y (las unidades son centímetros):  
+ 
+ 
+Solución:     
+cm4,586·6x68
+x6===    
+cm7,586·10yy10
+68===
+ 
+ 
+
+# FILE: a010-jerarquia.pdf
+
+## PAGE 1
+   
+matematizate.com         
+Página 1 de 5 
+    JERARQUÍA DE OPERACIONES   Tema 1   
+ 
+  Calcula reduciéndolo a un solo valor :    
+ 
+1)       
+325:375  
+ 
+2)       
+ 2:2032 103 150  = 
+ 
+3)       
+  108 24 125 202214  = 
+ 
+4)      
+ 4325:27:21  = 
+ 
+5)       
+43 19842 25   
+ 
+6)       
+2 100:400 2028:40 45     
+ 
+7)       
+2 104 50:350 50   
+ 
+8)       
+ 24 50:20053:81   
+ 
+     9)      
+ 3 10:5043 252 201  = 
+ 
+10)     
+  13 24 115 215235  = 
+ 
+     11)    
+ 10845:33:36  = 
+## PAGE 2
+   
+matematizate.com         
+Página 2 de 5 
+  
+     12)    
+ 59:3638  
+ 
+ 
+     13)    
+ 74)6:24(:144  
+ 
+ 
+14)    
+ 193975 48  
+ 
+ 
+15)    
+ 5:1057:21 14  
+ 
+ 
+16)    
+ 328:164:362:)238(  
+ 
+ 
+17)    
+3 25:2:100  
+ 
+ 
+18)    
+ 22368  
+ 
+ 
+19)    
+ 20:404323  
+ 
+ 
+20)    
+    7:40 42623 5735  
+ 
+## PAGE 3
+   
+matematizate.com         
+Página 3 de 5 
+ Por petición de algunos  usuarios  de Matematízate , añadimos a  este tema operaciones 
+combinadas con raíces cuadradas y potencias . 
+En el tema de Operaciones con potencias , o en el tema de Operaciones con raíces  
+es donde sobre todo se publicarán  ejercicios que ayuden a entender bien los conceptos y 
+propiedades de las potencias y raíces . 
+Pero aquí recogem os algunos ejercicios sencillos combinados también con raíces y 
+potencias recordando  así que el orden  en la combin ación de operaciones sería: 
+- Las operaciones que tenemos  dentro de los p aréntesis y corchetes.  
+- Potencias y raíces.  
+- Productos y divisiones.  
+- Sumas y restas.  
+ 
+ 
+    21)   
+ 7 123 49     
+                 
+    22)  
+ 3:189 7  
+ 
+           23)  
+222213  
+ 
+    24)   
+ 22 7:143 2 2    
+ 
+    25)   
+23 2 25 21 245  
+ 
+           26)  
+36 528 32922 = 
+   
+    27)  
+  225 11235 2 33 2  
+ 
+## PAGE 4
+   
+matematizate.com         
+Página 4 de 5 
+ Soluciones : 
+1)     
+5 75:375   
+2)     
+ 148 10 138 10 12 150 1043 150 106 103 150     
+3)      
+     2602 28 1820 202 28 1845 202 28 188 125 202 28   
+4)      
+ 3461465:5465:23   
+5)      
+ 73 56 17 568 25788 25 12 1988 25   
+6)      
+8808 405 4524 405 45   
+7)      
+25 32 57 327 50847 50   
+8)      
+  2702 135244 135244527   
+9)      
+ 18335 26 20135 132 20135 12 252 201   
+10)   
+ 
+11)      
+ 25 10 323 10 325:15 10 325:3 12   
+12)       
+3354 24  
+13)       
+64 28 36744:144   
+14)       
+21 19 27 35 48   
+15)       
+32 213 14   
+16)       
+ 1366166:362:2624:362:)68(   
+17)       
+5323 25:50   
+18)       
+14368   
+19)       
+123213   
+20)       
+  2923 307:143 307:1223657:2623235   
+21)       
+ 22 157537)7 123 49   
+22)       
+166373:189 7   
+23)       
+ 25646448419 21 32 2 222  
+24)      
+20 16428 49:19622 7:143 2 2  
+    
+77 125 70265 702 15215 70235 215 7028 115 215 70
+
+## PAGE 5
+   
+matematizate.com         
+Página 5 de 5 
+ 25)       
+  299 2091 20 3145 581 25 5 21 2452 2 223 2 2  
+26)       
+ 48 4267632 18 25669236 528 32922  
+27)       
+  50 50 1111 50 11111 50 116589 225 11235 2 33 2  
+ 
+ 
+ 
+ 
+   
+   
+ 
