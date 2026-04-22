@@ -1,4 +1,4 @@
-const CACHE_NAME = 'racha-mat-v1';
+const CACHE_NAME = 'racha-mat-v2';
 const urlsToCache = [
   '/',
   '/index.html',
