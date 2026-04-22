@@ -95,49 +95,55 @@ const MusicPlayer = () => {
     game: '/game.mp3'
   };
 
+  // Monitor de ruta para cambiar track
   useEffect(() => {
     const isGame = location.pathname.includes('/game/');
     const newTrack = isGame ? 'game' : 'home';
     if (newTrack !== currentTrack) {
       setCurrentTrack(newTrack);
     }
-  }, [location, currentTrack]);
+  }, [location.pathname, currentTrack]);
 
+  // Manejo de reproducción y autoplay
   useEffect(() => {
-    const handleFirstInteraction = () => {
-      if (audioRef.current && !muted) {
-        audioRef.current.play().catch(() => {});
-        // Remover después del primer éxito
-        window.removeEventListener('click', handleFirstInteraction);
-        window.removeEventListener('keydown', handleFirstInteraction);
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    audio.volume = 0.15;
+    
+    const playAudio = () => {
+      if (!muted) {
+        audio.play().catch(err => {
+          console.warn("Reproducción bloqueada: esperando interacción");
+        });
+      } else {
+        audio.pause();
       }
     };
 
-    window.addEventListener('click', handleFirstInteraction);
-    window.addEventListener('keydown', handleFirstInteraction);
+    // Intentar reproducir al cambiar track o silencio
+    playAudio();
+
+    // Escuchador de interacción para desbloquear audio
+    const unlock = () => {
+      if (!muted) audio.play().catch(() => {});
+      window.removeEventListener('click', unlock);
+      window.removeEventListener('keydown', unlock);
+    };
+
+    window.addEventListener('click', unlock);
+    window.addEventListener('keydown', unlock);
 
     return () => {
-      window.removeEventListener('click', handleFirstInteraction);
-      window.removeEventListener('keydown', handleFirstInteraction);
+      window.removeEventListener('click', unlock);
+      window.removeEventListener('keydown', unlock);
     };
-  }, [muted]);
-
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = 0.15;
-      if (!muted) {
-        audioRef.current.play().catch(() => {});
-      } else {
-        audioRef.current.pause();
-      }
-    }
   }, [muted, currentTrack]);
 
-  // Forzar carga cuando cambie la pista
+  // Carga forzada al cambiar de pista
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.load();
-      if (!muted) audioRef.current.play().catch(() => {});
     }
   }, [currentTrack]);
 
@@ -147,13 +153,10 @@ const MusicPlayer = () => {
         ref={audioRef} 
         src={tracks[currentTrack]} 
         loop 
-        onError={(e) => console.error("Error cargando el archivo de audio:", e)}
+        onError={() => console.warn("Archivo de audio no encontrado")}
       />
       <button 
-        onClick={() => {
-          console.log("Music toggle clicked, old state:", muted);
-          setMuted(!muted);
-        }}
+        onClick={() => setMuted(!muted)}
         style={{
           position: 'fixed',
           bottom: '1.5rem',
@@ -169,7 +172,7 @@ const MusicPlayer = () => {
           justifyContent: 'center',
           boxShadow: '0 4px 15px rgba(0,0,0,0.3)',
           cursor: 'pointer',
-          transition: 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+          transition: 'all 0.3s'
         }}
         className={muted ? 'pulse-button' : ''}
       >
