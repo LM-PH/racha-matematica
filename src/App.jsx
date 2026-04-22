@@ -730,7 +730,7 @@ export default function App() {
 
   return (
     <Router>
-      {/* <MusicPlayer /> */}
+      <MusicPlayer />
       <Routes>
         <Route path="/" element={<Home onUserUpdate={setUser} />} />
         <Route path="/register" element={<Register onUserUpdate={setUser} />} />
