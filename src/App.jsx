@@ -300,7 +300,7 @@ const Dashboard = ({ user, onUserUpdate }) => {
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                <div style={{ fontSize: '3rem', background: 'rgba(255,255,255,0.2)', padding: '0.5rem', borderRadius: '1.5rem', width: '70px', height: '70px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{user?.avatar || '🗿'}</div>
                <div>
-                 <div style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '2px', color: 'rgba(255,255,255,0.8)' }}>Perfil del Jugador</div>
+                 <div style={{ fontSize: '0.75rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '2px', color: 'rgba(255,255,255,0.8)' }}>Información Pública</div>
                  <h2 style={{ fontSize: '2.2rem', margin: '0.2rem 0', color: 'white', textShadow: '0 4px 10px rgba(0,0,0,0.3)' }}>{user?.nickname}</h2>
                </div>
             </div>
@@ -630,9 +630,7 @@ const Ranking = ({ user }) => {
                   {u.nickname} 
                   {u.nickname === user?.nickname && <span style={{ fontSize: '0.65rem', background: '#4F46E5', color: 'white', padding: '2px 6px', borderRadius: '4px' }}>TÚ</span>}
                 </div>
-                <div style={{ fontSize: '0.75rem', color: '#64748B', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                  👤 <span style={{ textTransform: 'capitalize' }}>{u.name?.toLowerCase()}</span>
-                </div>
+
                 <div className="ranking-stats" style={{ color: '#4F46E5', fontSize: '0.85rem', fontWeight: 600, marginTop: '2px' }}>
                   🔥 Racha: {u.mejor_racha} <span style={{ color: '#94A3B8', fontWeight: 400 }}>• Niv: {u.nivel}</span>
                 </div>
