@@ -661,10 +661,25 @@ const Admin = () => {
 
   const fetchStudents = async () => {
     setLoading(true);
-    const q = query(collection(db, 'usuarios'), orderBy('grade'), orderBy('group'));
-    const snap = await getDocs(q);
-    setStudents(snap.docs.map(d => ({ id: d.id, ...d.data() })));
-    setLoading(false);
+    try {
+      console.log("Fetching students...");
+      const q = query(collection(db, 'usuarios'));
+      const snap = await getDocs(q);
+      const data = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      
+      // Ordenar en memoria para evitar problemas de índices compuestos en Firestore
+      const sortedData = data.sort((a, b) => {
+        if (a.grade !== b.grade) return a.grade - b.grade;
+        return (a.group || "").localeCompare(b.group || "");
+      });
+
+      setStudents(sortedData);
+    } catch (err) {
+      console.error("Error al obtener alumnos:", err);
+      alert("Error al cargar alumnos: " + err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
