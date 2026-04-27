@@ -217,7 +217,15 @@ const Register = ({ onUserUpdate }) => {
           <option value="2">Segundo Año</option>
           <option value="3">Tercer Año</option>
         </select>
-        <input className="input-field" placeholder="Grupo (ej: A, B)" required value={formData.group} onChange={e => setFormData({...formData, group: e.target.value})} />
+        <select className="input-field" required value={formData.group} onChange={e => setFormData({...formData, group: e.target.value})}>
+          <option value="">Selecciona tu grupo</option>
+          <option value="A">A</option>
+          <option value="B">B</option>
+          <option value="C">C</option>
+          <option value="D">D</option>
+          <option value="E">E</option>
+          <option value="F">F</option>
+        </select>
         <input className="input-field" placeholder="Nickname" required value={formData.nickname} onChange={e => setFormData({...formData, nickname: e.target.value})} />
         
         <div style={{ marginBottom: '1.5rem' }}>
