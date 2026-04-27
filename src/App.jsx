@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate, Link, useParams, useLocation } from 'react-router-dom';
 import { db } from './firebase';
 import { collection, addDoc, getDocs, query, where, updateDoc, doc, orderBy, limit, deleteDoc } from 'firebase/firestore';
-import { Flame, Brain, Trophy, ArrowLeft, Send, Share2, Home as HomeIcon, LogOut, ChevronRight, Volume2, VolumeX } from 'lucide-react';
+import { Flame, Brain, Trophy, ArrowLeft, Send, Share2, Home as HomeIcon, LogOut, ChevronRight, Volume2, VolumeX, ShieldCheck, Trash2 } from 'lucide-react';
 import { generatePythagorasExercises, generateThalesExercises } from './exerciseBank';
 import { generateEcuaciones1Exercises, generateJerarquiaExercises, generateSistemas2x2Exercises } from './exerciseBank2';
+import { deleteAllUsers } from './wipeUsers';
 
 // ======================================================
 //  COLECCIÓN ACTIVA
@@ -172,6 +173,7 @@ const Home = ({ onUserUpdate }) => {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           <Link to="/register" className="btn btn-primary">Registrarme</Link>
           <Link to="/login" className="btn btn-secondary">Ya estoy registrado</Link>
+          <Link to="/admin-panel-control" className="btn btn-outline" style={{ fontSize: '0.85rem' }}>👨‍🏫 Entrar como Administrador</Link>
         </div>
       </div>
     </div>
@@ -646,6 +648,152 @@ const Ranking = ({ user }) => {
   );
 };
 
+const Admin = () => {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isAuthorized, setIsAuthorized] = useState(false);
+  const [students, setStudents] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const ADMIN_EMAIL = "zlagustin10@gmail.com";
+  const ADMIN_PASS = "adminRacha2026"; // Puedes cambiarla aquí
+
+  const fetchStudents = async () => {
+    setLoading(true);
+    const q = query(collection(db, 'usuarios'), orderBy('grade'), orderBy('group'));
+    const snap = await getDocs(q);
+    setStudents(snap.docs.map(d => ({ id: d.id, ...d.data() })));
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    if (isAuthorized) fetchStudents();
+  }, [isAuthorized]);
+
+  const handleAuth = (e) => {
+    e.preventDefault();
+    if (email === ADMIN_EMAIL && password === ADMIN_PASS) {
+      setIsAuthorized(true);
+    } else {
+      alert("Credenciales de administrador incorrectas");
+    }
+  };
+
+  const handleDeleteUser = async (id, name) => {
+    if (confirm(`¿Eliminar a ${name}?`)) {
+      await deleteDoc(doc(db, 'usuarios', id));
+      fetchStudents();
+    }
+  };
+
+  const handleDeleteGroup = async (grade, group) => {
+    if (confirm(`¿Eliminar a TODOS los alumnos de ${grade}° ${group}?`)) {
+      const toDelete = students.filter(s => s.grade === grade && s.group === group);
+      for (const s of toDelete) {
+        await deleteDoc(doc(db, 'usuarios', s.id));
+      }
+      fetchStudents();
+    }
+  };
+
+  const handleWipeAll = async () => {
+    if (confirm("🚨 ¿BORRAR ABSOLUTAMENTE TODO? Esta acción no se puede deshacer.")) {
+      await deleteAllUsers();
+      fetchStudents();
+    }
+  };
+
+  // Agrupar estudiantes
+  const grouped = students.reduce((acc, s) => {
+    const key = `${s.grade}° Grado - Grupo ${s.group}`;
+    if (!acc[key]) acc[key] = [];
+    acc[key].push(s);
+    return acc;
+  }, {});
+
+  return (
+    <div className="app-container animate-fade" style={{ background: '#F8FAFC' }}>
+      <div className="stats-bar">
+        <Link to="/"><ArrowLeft size={24} color="#4F46E5" /></Link>
+        <span>Control de Administrador</span>
+        <div style={{width: 24}}></div>
+      </div>
+
+      <div style={{ padding: '1rem' }}>
+        {!isAuthorized ? (
+          <form className="glass-card" onSubmit={handleAuth} style={{ maxWidth: '400px', margin: '2rem auto' }}>
+            <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
+              <ShieldCheck size={48} color="#4F46E5" style={{ margin: '0 auto' }} />
+              <h2 style={{ marginTop: '1rem' }}>Admin Login</h2>
+            </div>
+            <input className="input-field" type="email" placeholder="Correo Administrador" value={email} onChange={e => setEmail(e.target.value)} required />
+            <input className="input-field" type="password" placeholder="Contraseña" value={password} onChange={e => setPassword(e.target.value)} required />
+            <button className="btn btn-primary" type="submit">Acceder al Panel</button>
+          </form>
+        ) : (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            <div className="glass-card" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem' }}>
+              <div>
+                <h2 style={{ margin: 0, fontSize: '1.2rem' }}>Hola, Agustín 👋</h2>
+                <p style={{ margin: 0, fontSize: '0.8rem', color: '#64748B' }}>Total: {students.length} inscritos</p>
+              </div>
+              <button className="btn-ranking" style={{ padding: '0.5rem 1rem', background: '#F43F5E' }} onClick={handleWipeAll}>
+                Borrar Todo
+              </button>
+            </div>
+
+            {loading ? <p style={{textAlign:'center'}}>Cargando lista...</p> : (
+              Object.keys(grouped).length === 0 ? <p style={{textAlign:'center', color:'#64748B'}}>No hay alumnos registrados.</p> :
+              Object.entries(grouped).map(([groupKey, list]) => (
+                <div key={groupKey} className="glass-card" style={{ padding: '1rem' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', borderBottom: '1px solid #E2E8F0', paddingBottom: '0.5rem' }}>
+                    <h3 style={{ margin: 0, color: '#4F46E5' }}>{groupKey}</h3>
+                    <button 
+                      style={{ background: 'none', border: 'none', color: '#F43F5E', fontSize: '0.8rem', cursor: 'pointer', fontWeight: 700 }}
+                      onClick={() => handleDeleteGroup(list[0].grade, list[0].group)}
+                    >
+                      🗑️ Eliminar Grupo
+                    </button>
+                  </div>
+                  
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                    {list.map(s => (
+                      <div key={s.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.5rem', background: 'white', borderRadius: '8px', border: '1px solid #F1F5F9' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                          <span style={{ fontSize: '1.2rem' }}>{s.avatar}</span>
+                          <div>
+                            <div style={{ fontWeight: 700, fontSize: '0.9rem' }}>{s.nickname}</div>
+                            <div style={{ fontSize: '0.7rem', color: '#94A3B8' }}>{s.name}</div>
+                          </div>
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                          <div style={{ textAlign: 'right' }}>
+                            <div style={{ fontSize: '0.8rem', fontWeight: 800, color: '#4F46E5' }}>🔥 {s.mejor_racha}</div>
+                            <div style={{ fontSize: '0.6rem', color: '#94A3B8' }}>Niv. {s.nivel}</div>
+                          </div>
+                          <button 
+                            style={{ background: 'none', border: 'none', color: '#CBD5E1', cursor: 'pointer' }} 
+                            onClick={() => handleDeleteUser(s.id, s.nickname)}
+                          >
+                            <Trash2 size={18} />
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))
+            )}
+            
+            <button className="btn btn-outline" onClick={() => setIsAuthorized(false)}>Cerrar Sesión</button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
 const Results = ({ user }) => {
   const navigate = useNavigate();
   return (
@@ -697,6 +845,7 @@ export default function App() {
         <Route path="/game/:topic" element={<Game user={user} onUserUpdate={setUser} />} />
         <Route path="/ranking/:type" element={<Ranking user={user} />} />
         <Route path="/results" element={<Results user={user} />} />
+        <Route path="/admin-panel-control" element={<Admin />} />
       </Routes>
     </Router>
   );
