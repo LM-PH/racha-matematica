@@ -233,6 +233,7 @@ const Register = ({ onUserUpdate }) => {
 
         <select 
           className="input-field" 
+          style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
           required 
           value={formData.group} 
           onChange={e => setFormData({...formData, group: e.target.value})}
