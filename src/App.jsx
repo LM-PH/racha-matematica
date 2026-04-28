@@ -190,6 +190,10 @@ const Register = ({ onUserUpdate }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!formData.group) {
+      alert('Por favor selecciona tu grupo (A-F)');
+      return;
+    }
     try {
       const docRef = await addDoc(collection(db, 'usuarios'), {
         ...formData,
@@ -217,15 +221,33 @@ const Register = ({ onUserUpdate }) => {
           <option value="2">Segundo Año</option>
           <option value="3">Tercer Año</option>
         </select>
-        <select className="input-field" required value={formData.group} onChange={e => setFormData({...formData, group: e.target.value})}>
-          <option value="">Selecciona tu grupo</option>
-          <option value="A">A</option>
-          <option value="B">B</option>
-          <option value="C">C</option>
-          <option value="D">D</option>
-          <option value="E">E</option>
-          <option value="F">F</option>
-        </select>
+        <div style={{ marginBottom: '1.5rem' }}>
+          <label style={{ fontSize: '0.85rem', fontWeight: 700, color: '#64748B', display: 'block', marginBottom: '0.5rem' }}>SELECCIONA TU GRUPO</label>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: '0.5rem' }}>
+            {['A', 'B', 'C', 'D', 'E', 'F'].map(g => (
+              <button 
+                type="button" 
+                key={g} 
+                onClick={() => setFormData({...formData, group: g})}
+                style={{
+                  padding: '0.8rem 0',
+                  borderRadius: '12px',
+                  border: formData.group === g ? '2px solid #4F46E5' : '2px solid transparent',
+                  background: formData.group === g ? '#EEF2FF' : 'white',
+                  color: formData.group === g ? '#4F46E5' : '#64748B',
+                  fontWeight: 800,
+                  fontSize: '1.1rem',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s',
+                  boxShadow: '0 2px 4px rgba(0,0,0,0.05)'
+                }}
+              >
+                {g}
+              </button>
+            ))}
+          </div>
+          <input type="hidden" required value={formData.group} />
+        </div>
         <input className="input-field" placeholder="Nickname" required value={formData.nickname} onChange={e => setFormData({...formData, nickname: e.target.value})} />
         
         <div style={{ marginBottom: '1.5rem' }}>
