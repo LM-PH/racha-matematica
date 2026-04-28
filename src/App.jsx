@@ -596,65 +596,138 @@ const Ranking = ({ user }) => {
   const { type } = useParams();
   const [list, setList] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [expandedGroups, setExpandedGroups] = useState({});
 
   useEffect(() => {
     const fetchRanking = async () => {
       setLoading(true);
       try {
         let q;
-        if (type === 'group') {
-          q = query(collection(db, 'usuarios'), where('grade', '==', user.grade), where('group', '==', user.group), orderBy('mejor_racha', 'desc'), limit(50));
-        } else {
-          q = query(collection(db, 'usuarios'), where('grade', '==', user.grade), orderBy('mejor_racha', 'desc'), limit(50));
-        }
+        // Obtenemos a todos los del grado para poder agruparlos
+        q = query(collection(db, 'usuarios'), where('grade', '==', user.grade));
         const snap = await getDocs(q);
-        setList(snap.docs.map(d => ({ id: d.id, ...d.data() })));
+        const data = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        
+        // Ordenar globalmente por racha primero
+        data.sort((a, b) => b.mejor_racha - a.mejor_racha);
+        setList(data);
+
+        // Si es por grupo, expandir por defecto el grupo del usuario
+        if (type === 'group') {
+          setExpandedGroups({ [user.group]: true });
+        }
       } catch (err) {
         console.error("Error en ranking:", err);
-        const fallbackQ = query(collection(db, 'usuarios'), where('grade', '==', user.grade), limit(50));
-        const snap = await getDocs(fallbackQ);
-        setList(snap.docs.map(d => ({ id: d.id, ...d.data() })).sort((a,b) => b.mejor_racha - a.mejor_racha));
       }
       setLoading(false);
     };
     if (user) fetchRanking();
   }, [user, type]);
 
+  const toggleGroup = (groupName) => {
+    setExpandedGroups(prev => ({
+      ...prev,
+      [groupName]: !prev[groupName]
+    }));
+  };
+
+  // Agrupamiento
+  const groupedData = list.reduce((acc, u) => {
+    const group = u.group || "Sin Grupo";
+    if (!acc[group]) acc[group] = [];
+    acc[group].push(u);
+    return acc;
+  }, {});
+
+  // Ordenar las llaves de los grupos (A, B, C...)
+  const sortedGroups = Object.keys(groupedData).sort();
+
   return (
     <div className="app-container animate-fade">
       <div className="stats-bar">
         <Link to="/dashboard"><ArrowLeft size={24} color="#4F46E5" /></Link>
-        <span>Ranking {type === 'group' ? `Grupo ${user?.group}` : `${user?.grade === '2' ? 'Segundo' : 'Tercer'} Año`}</span>
+        <span>Ranking {user?.grade}° Año</span>
         <div style={{width: 24}}></div>
       </div>
       
       <div style={{ padding: '1rem' }}>
         {loading ? <div style={{textAlign:'center', padding:'2rem'}}>Cargando líderes...</div> : (
-          list.length === 0 ? <div style={{textAlign:'center', padding:'2rem', color:'#64748B'}}>¡Sé el primero en aparecer aquí! 🌟</div> :
-          list.map((u, i) => (
-            <div key={u.id} className="ranking-item" style={{ background: u.nickname === user?.nickname ? '#EEF2FF' : 'white', border: u.nickname === user?.nickname ? '2px solid #4F46E5' : 'none' }}>
-              <div className="ranking-rank" style={{ color: i < 3 ? '#F59E0B' : '#4F46E5', fontSize: '1.2rem', fontWeight: 800, width: '40px' }}>#{i+1}</div>
-              <div className="ranking-info" style={{ flex: 1 }}>
-                <div className="ranking-nickname" style={{ fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <span style={{ fontSize: '1.4rem' }}>{u.avatar || '🗿'}</span>
-                  {u.nickname} 
-                  {u.nickname === user?.nickname && <span style={{ fontSize: '0.65rem', background: '#4F46E5', color: 'white', padding: '2px 6px', borderRadius: '4px' }}>TÚ</span>}
-                </div>
-                <div style={{ fontSize: '0.75rem', color: '#64748B', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                  👤 <span style={{ textTransform: 'capitalize' }}>{u.name?.toLowerCase()}</span>
-                </div>
-                <div className="ranking-stats" style={{ color: '#4F46E5', fontSize: '0.85rem', fontWeight: 600, marginTop: '2px' }}>
-                  🔥 Racha: {u.mejor_racha} <span style={{ color: '#94A3B8', fontWeight: 400 }}>• Niv: {u.nivel}</span>
-                </div>
+          type === 'grade' ? (
+            // VISTA GLOBAL DE GRADO
+            list.map((u, i) => (
+              <RankingItem key={u.id} u={u} i={i} currentUser={user} />
+            ))
+          ) : (
+            // VISTA AGRUPADA POR GRUPOS
+            sortedGroups.map(groupName => (
+              <div key={groupName} style={{ marginBottom: '0.8rem' }}>
+                <button 
+                  onClick={() => toggleGroup(groupName)}
+                  className="glass-card" 
+                  style={{ 
+                    width: '100%', 
+                    display: 'flex', 
+                    justifyContent: 'space-between', 
+                    alignItems: 'center', 
+                    padding: '1rem',
+                    borderLeft: groupName === user.group ? '4px solid #4F46E5' : '1px solid #E2E8F0',
+                    cursor: 'pointer',
+                    background: groupName === user.group ? '#EEF2FF' : 'white'
+                  }}
+                >
+                  <span style={{ fontWeight: 800, color: '#1E293B' }}>GRUPO {groupName}</span>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <span style={{ fontSize: '0.8rem', color: '#64748B' }}>{groupedData[groupName].length} alumnos</span>
+                    <ChevronRight 
+                      size={20} 
+                      style={{ 
+                        transform: expandedGroups[groupName] ? 'rotate(90deg)' : 'rotate(0deg)',
+                        transition: 'transform 0.3s'
+                      }} 
+                    />
+                  </div>
+                </button>
+                
+                {expandedGroups[groupName] && (
+                  <div className="animate-fade" style={{ padding: '0.5rem 0 0 1rem' }}>
+                    {groupedData[groupName].map((u, i) => (
+                      <RankingItem key={u.id} u={u} i={i} currentUser={user} />
+                    ))}
+                  </div>
+                )}
               </div>
-              {i === 0 && <Trophy size={24} color="#F59E0B" fill="#F59E0B" />}
-            </div>
-          ))
+            ))
+          )
         )}
       </div>
     </div>
   );
 };
+
+// Componente pequeño para el item del ranking
+const RankingItem = ({ u, i, currentUser }) => (
+  <div className="ranking-item" style={{ 
+    background: u.nickname === currentUser?.nickname ? '#EEF2FF' : 'white', 
+    border: u.nickname === currentUser?.nickname ? '2px solid #4F46E5' : 'none',
+    marginBottom: '0.5rem'
+  }}>
+    <div className="ranking-rank" style={{ color: i < 3 ? '#F59E0B' : '#4F46E5', fontSize: '1.2rem', fontWeight: 800, width: '40px' }}>#{i+1}</div>
+    <div className="ranking-info" style={{ flex: 1 }}>
+      <div className="ranking-nickname" style={{ fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        <span style={{ fontSize: '1.4rem' }}>{u.avatar || '🗿'}</span>
+        {u.nickname} 
+        {u.nickname === currentUser?.nickname && <span style={{ fontSize: '0.65rem', background: '#4F46E5', color: 'white', padding: '2px 6px', borderRadius: '4px' }}>TÚ</span>}
+      </div>
+      <div style={{ fontSize: '0.75rem', color: '#64748B' }}>
+        👤 {u.name}
+      </div>
+      <div className="ranking-stats" style={{ color: '#4F46E5', fontSize: '0.85rem', fontWeight: 600 }}>
+        🔥 Racha: {u.mejor_racha} <span style={{ color: '#94A3B8', fontWeight: 400 }}>• Niv: {u.nivel}</span>
+      </div>
+    </div>
+    {i === 0 && <Trophy size={24} color="#F59E0B" fill="#F59E0B" />}
+  </div>
+);
 
 const Admin = () => {
   const navigate = useNavigate();
