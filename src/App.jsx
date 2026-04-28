@@ -232,19 +232,20 @@ const Register = ({ onUserUpdate }) => {
         </select>
 
         <select 
-          className="input-field" 
+          className="input-field notranslate" 
           style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
           required 
           value={formData.group} 
           onChange={e => setFormData({...formData, group: e.target.value})}
+          translate="no"
         >
-          <option value="">Selecciona tu grupo</option>
-          <option value="A">A</option>
-          <option value="B">B</option>
-          <option value="C">C</option>
-          <option value="D">D</option>
-          <option value="E">E</option>
-          <option value="F">F</option>
+          <option value="" translate="no">Selecciona tu grupo</option>
+          <option value="A" translate="no">A</option>
+          <option value="B" translate="no">B</option>
+          <option value="C" translate="no">C</option>
+          <option value="D" translate="no">D</option>
+          <option value="E" translate="no">E</option>
+          <option value="F" translate="no">F</option>
         </select>
         <input className="input-field" placeholder="Nickname" required value={formData.nickname} onChange={e => setFormData({...formData, nickname: e.target.value})} />
         
