@@ -190,6 +190,10 @@ const Register = ({ onUserUpdate }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!formData.grade) {
+      alert('Por favor selecciona tu grado (2do o 3ro)');
+      return;
+    }
     if (!formData.group) {
       alert('Por favor selecciona tu grupo (A-F)');
       return;
@@ -216,11 +220,36 @@ const Register = ({ onUserUpdate }) => {
       <form className="glass-card" onSubmit={handleSubmit}>
         <input className="input-field" placeholder="Correo electrónico" required value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} />
         <input className="input-field" placeholder="Nombre completo" required value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} />
-        <select className="input-field" required value={formData.grade} onChange={e => setFormData({...formData, grade: e.target.value})}>
-          <option value="">Selecciona tu grado</option>
-          <option value="2">Segundo Año</option>
-          <option value="3">Tercer Año</option>
-        </select>
+        <div style={{ marginBottom: '1.5rem' }}>
+          <label style={{ fontSize: '0.85rem', fontWeight: 700, color: '#64748B', display: 'block', marginBottom: '0.5rem' }}>SELECCIONA TU GRADO</label>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+            {[
+              { val: '2', label: '2do Año' },
+              { val: '3', label: '3er Año' }
+            ].map(g => (
+              <button 
+                type="button" 
+                key={g.val} 
+                onClick={() => setFormData({...formData, grade: g.val})}
+                style={{
+                  padding: '1rem 0',
+                  borderRadius: '12px',
+                  border: formData.grade === g.val ? '2px solid #4F46E5' : '2px solid transparent',
+                  background: formData.grade === g.val ? '#EEF2FF' : 'white',
+                  color: formData.grade === g.val ? '#4F46E5' : '#64748B',
+                  fontWeight: 800,
+                  fontSize: '1rem',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s',
+                  boxShadow: '0 2px 4px rgba(0,0,0,0.05)'
+                }}
+              >
+                {g.label}
+              </button>
+            ))}
+          </div>
+          <input type="hidden" required value={formData.grade} />
+        </div>
         <div style={{ marginBottom: '1.5rem' }}>
           <label style={{ fontSize: '0.85rem', fontWeight: 700, color: '#64748B', display: 'block', marginBottom: '0.5rem' }}>SELECCIONA TU GRUPO</label>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: '0.5rem' }}>
