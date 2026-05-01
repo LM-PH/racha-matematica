@@ -963,6 +963,8 @@ export default function App() {
         <Route path="/ranking/:type" element={<Ranking user={user} />} />
         <Route path="/results" element={<Results user={user} />} />
         <Route path="/admin-panel-control" element={<Admin />} />
+        {/* Catch-all route for any undefined paths */}
+        <Route path="*" element={<Home onUserUpdate={setUser} />} />
       </Routes>
     </Router>
   );
