@@ -872,28 +872,38 @@ const Admin = () => {
                   
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                     {list.map(s => (
-                      <div key={s.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.5rem', background: 'white', borderRadius: '8px', border: '1px solid #F1F5F9' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                          <span style={{ fontSize: '1.2rem' }}>{s.avatar}</span>
+                      <div key={s.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.8rem', background: 'white', borderRadius: '8px', border: '1px solid #F1F5F9', flexWrap: 'wrap', gap: '0.5rem' }}>
+                        {/* 1. Datos del Alumno */}
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', minWidth: '120px', flex: 1 }}>
+                          <span style={{ fontSize: '1.4rem' }}>{s.avatar}</span>
                           <div>
-                            <div style={{ fontWeight: 700, fontSize: '0.9rem' }}>{s.nickname}</div>
-                            <div style={{ fontSize: '0.7rem', color: '#94A3B8' }}>{s.name}</div>
+                            <div style={{ fontWeight: 800, fontSize: '0.9rem', color: '#1E293B' }}>{s.nickname}</div>
+                            <div style={{ fontSize: '0.7rem', color: '#64748B' }}>{s.name}</div>
                           </div>
                         </div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                          {s.examen && (
-                            <div style={{ textAlign: 'right', paddingRight: '0.5rem', borderRight: '1px solid #E2E8F0' }}>
-                              <div style={{ fontSize: '0.8rem', fontWeight: 800, color: '#E11D48' }}>Examen: {s.examen.score}/10</div>
-                              <div style={{ fontSize: '0.55rem', color: '#94A3B8' }}>{new Date(s.examen.timestamp).toLocaleString()}</div>
-                            </div>
+                        
+                        {/* 2. Columna del Examen */}
+                        <div style={{ minWidth: '150px', flex: 1.5, textAlign: 'center', background: '#F8FAFC', padding: '0.4rem', borderRadius: '6px' }}>
+                          {s.examen ? (
+                            <>
+                              <div style={{ fontSize: '0.85rem', fontWeight: 800, color: '#E11D48' }}>Examen: {s.examen.score}/10</div>
+                              <div style={{ fontSize: '0.65rem', color: '#94A3B8' }}>{new Date(s.examen.timestamp).toLocaleString()}</div>
+                            </>
+                          ) : (
+                            <div style={{ fontSize: '0.75rem', color: '#CBD5E1', fontStyle: 'italic' }}>Sin presentar examen</div>
                           )}
+                        </div>
+
+                        {/* 3. Columna de Estadísticas */}
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', minWidth: '100px', flex: 1, justifyContent: 'flex-end' }}>
                           <div style={{ textAlign: 'right' }}>
                             <div style={{ fontSize: '0.8rem', fontWeight: 800, color: '#4F46E5' }}>🔥 {s.mejor_racha}</div>
                             <div style={{ fontSize: '0.6rem', color: '#94A3B8' }}>Niv. {s.nivel}</div>
                           </div>
                           <button 
-                            style={{ background: 'none', border: 'none', color: '#CBD5E1', cursor: 'pointer' }} 
+                            style={{ background: 'none', border: 'none', color: '#F87171', cursor: 'pointer' }} 
                             onClick={() => handleDeleteUser(s.id, s.nickname)}
+                            title="Eliminar usuario"
                           >
                             <Trash2 size={18} />
                           </button>
