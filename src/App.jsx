@@ -358,24 +358,22 @@ const Dashboard = ({ user, onUserUpdate }) => {
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          {user?.grade === '2' && (
-            <div style={{ marginTop: '0.5rem', marginBottom: '0.5rem' }}>
-              {user.examen ? (
-                <div style={{ background: '#F1F5F9', padding: '1rem', borderRadius: '1rem', textAlign: 'center', border: '2px solid #E2E8F0' }}>
-                  <div style={{ fontSize: '0.8rem', fontWeight: 800, color: '#64748B' }}>EXAMEN COMPLETADO</div>
-                  <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#10B981' }}>Calificación: {user.examen.score}/10</div>
-                </div>
-              ) : (
-                <button 
-                  className="btn btn-primary" 
-                  style={{ padding: '1.2rem', fontSize: '1.2rem', background: 'linear-gradient(135deg, #F43F5E 0%, #E11D48 100%)', boxShadow: '0 4px 15px rgba(225, 29, 72, 0.4)' }} 
-                  onClick={() => navigate('/exam')}
-                >
-                  📝 TOMAR EXAMEN FINAL
-                </button>
-              )}
-            </div>
-          )}
+          <div style={{ marginTop: '0.5rem', marginBottom: '0.5rem' }}>
+            {user?.examen ? (
+              <div style={{ background: '#F1F5F9', padding: '1rem', borderRadius: '1rem', textAlign: 'center', border: '2px solid #E2E8F0' }}>
+                <div style={{ fontSize: '0.8rem', fontWeight: 800, color: '#64748B' }}>EXAMEN COMPLETADO</div>
+                <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#10B981' }}>Calificación: {user.examen.score}/10</div>
+              </div>
+            ) : (
+              <button 
+                className="btn btn-primary" 
+                style={{ padding: '1.2rem', fontSize: '1.2rem', background: 'linear-gradient(135deg, #F43F5E 0%, #E11D48 100%)', boxShadow: '0 4px 15px rgba(225, 29, 72, 0.4)' }} 
+                onClick={() => navigate('/exam')}
+              >
+                📝 TOMAR EXAMEN FINAL
+              </button>
+            )}
+          </div>
 
           <button className="btn btn-primary" style={{ padding: '1.2rem', fontSize: '1.2rem' }} onClick={() => navigate('/selection')}>
              🚀 ¡JUGAR AHORA! ➔
@@ -985,7 +983,7 @@ export const Exam = ({ user, onUserUpdate }) => {
   const [currentAnswer, setCurrentAnswer] = useState('');
 
   useEffect(() => {
-    if (!user || user.grade !== '2') {
+    if (!user) {
       navigate('/dashboard');
       return;
     }
@@ -997,18 +995,33 @@ export const Exam = ({ user, onUserUpdate }) => {
 
     const fetchExamExercises = async () => {
       try {
-        const topics = ['Sistemas de Ecuaciones 2x2', 'Ángulos entre Paralelas', 'Probabilidad'];
+        let topics = [];
+        let itemsPerTopic = 1;
+        if (user.grade === '2') {
+          topics = ['Sistemas de Ecuaciones 2x2', 'Ángulos entre Paralelas', 'Probabilidad'];
+          itemsPerTopic = 1;
+        } else {
+          topics = ['Teorema de Pitágoras', 'Teorema de Tales', 'Ecuaciones de 2do Grado', 'Ley de Senos', 'Ley de Cosenos'];
+          itemsPerTopic = 2;
+        }
+        const expectedCount = topics.length * itemsPerTopic;
+
         const fetched = [];
         for (const t of topics) {
-          const q = query(collection(db, EJERCICIOS_COL), where('grade', '==', '2'), where('topic', '==', t));
+          const q = query(collection(db, EJERCICIOS_COL), where('grade', '==', user.grade), where('topic', '==', t));
           const snap = await getDocs(q);
           if (!snap.empty) {
             const docs = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-            const randomEx = docs[Math.floor(Math.random() * docs.length)];
-            fetched.push(randomEx);
+            for (let k = 0; k < itemsPerTopic; k++) {
+              if (docs.length > 0) {
+                const randIndex = Math.floor(Math.random() * docs.length);
+                const randomEx = docs.splice(randIndex, 1)[0];
+                fetched.push(randomEx);
+              }
+            }
           }
         }
-        if (fetched.length === 3) {
+        if (fetched.length === expectedCount) {
           setExercises(fetched);
         } else {
           alert('Faltan ejercicios en la base de datos para generar el examen.');
@@ -1030,11 +1043,11 @@ export const Exam = ({ user, onUserUpdate }) => {
     setAnswers(newAnswers);
     setCurrentAnswer('');
 
-    if (currentIndex < 2) {
+    if (currentIndex < exercises.length - 1) {
       setCurrentIndex(currentIndex + 1);
     } else {
       const correctCount = newAnswers.filter(a => a).length;
-      const score = parseFloat(((correctCount / 3) * 10).toFixed(1));
+      const score = parseFloat(((correctCount / exercises.length) * 10).toFixed(1));
       
       const examenData = {
         score,
@@ -1063,7 +1076,7 @@ export const Exam = ({ user, onUserUpdate }) => {
     <div className="app-container animate-fade" style={{ background: '#F8FAFC' }}>
       <div className="stats-bar" style={{ background: '#E11D48' }}>
         <span>Examen Final</span>
-        <span>Pregunta {currentIndex + 1} / 3</span>
+        <span>Pregunta {currentIndex + 1} / {exercises.length}</span>
       </div>
 
       <div style={{ padding: '1.5rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
@@ -1083,14 +1096,38 @@ export const Exam = ({ user, onUserUpdate }) => {
                <p style={{ fontSize: '1.1rem', color: '#334155', textAlign: 'center', marginBottom: '1.5rem', fontWeight: 600 }}>{exercise.question}</p>
              )}
 
-             <input
-               type="number"
-               className="input-field"
-               placeholder="Tu respuesta..."
-               value={currentAnswer}
-               onChange={e => setCurrentAnswer(e.target.value)}
-               style={{ textAlign: 'center', fontSize: '1.5rem', fontWeight: 700, padding: '1rem' }}
-             />
+             {exercise.options ? (
+               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.8rem', marginTop: '1rem' }}>
+                 {exercise.options.map((opt, i) => (
+                   <button 
+                     key={i} 
+                     onClick={() => setCurrentAnswer(String(opt))}
+                     style={{
+                       padding: '1rem',
+                       fontSize: '1.2rem',
+                       fontWeight: 700,
+                       borderRadius: '0.75rem',
+                       border: currentAnswer === String(opt) ? '3px solid #E11D48' : '3px solid #E2E8F0',
+                       background: currentAnswer === String(opt) ? '#FFF1F2' : 'white',
+                       color: '#1E293B',
+                       cursor: 'pointer',
+                       transition: 'all 0.2s'
+                     }}
+                   >
+                     {opt}
+                   </button>
+                 ))}
+               </div>
+             ) : (
+               <input
+                 type="number"
+                 className="input-field"
+                 placeholder="Tu respuesta..."
+                 value={currentAnswer}
+                 onChange={e => setCurrentAnswer(e.target.value)}
+                 style={{ textAlign: 'center', fontSize: '1.5rem', fontWeight: 700, padding: '1rem' }}
+               />
+             )}
           </div>
         </div>
 
@@ -1098,9 +1135,9 @@ export const Exam = ({ user, onUserUpdate }) => {
           className="btn btn-primary" 
           onClick={handleNext} 
           disabled={currentAnswer.trim() === ''}
-          style={{ marginTop: '1.5rem', padding: '1.2rem', fontSize: '1.2rem', background: currentIndex === 2 ? '#10B981' : '#4F46E5' }}
+          style={{ marginTop: '1.5rem', padding: '1.2rem', fontSize: '1.2rem', background: currentIndex === exercises.length - 1 ? '#10B981' : '#4F46E5' }}
         >
-          {currentIndex === 2 ? 'ENVIAR EXAMEN' : 'SIGUIENTE PREGUNTA ➔'}
+          {currentIndex === exercises.length - 1 ? 'ENVIAR EXAMEN' : 'SIGUIENTE PREGUNTA ➔'}
         </button>
       </div>
     </div>
