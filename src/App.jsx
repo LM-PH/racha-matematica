@@ -6,19 +6,20 @@ import { Flame, Brain, Trophy, ArrowLeft, Send, Share2, Home as HomeIcon, LogOut
 import { generatePythagorasExercises, generateThalesExercises } from './exerciseBank';
 import { generateEcuaciones1Exercises, generateJerarquiaExercises, generateSistemas2x2Exercises } from './exerciseBank2';
 import { generateAngulosParalelasExercises, generateProbabilidadExercises } from './exerciseBank3';
+import { generateEcuacionesCuadraticasExercises, generateLeySenosExercises, generateLeyCosenosExercises } from './exerciseBank4';
 import { deleteAllUsers } from './wipeUsers';
 
 // ======================================================
 //  COLECCIÓN ACTIVA
 // ======================================================
-const EJERCICIOS_COL = 'ejercicios_v4';
+const EJERCICIOS_COL = 'ejercicios_v5';
 
 // ======================================================
 //  SEED — Puebla Firebase con los 80+ ejercicios
 // ======================================================
 async function seedGrade3IfNeeded() {
-  const topics = ['Teorema de Pitágoras', 'Teorema de Tales'];
-  const generators = [generatePythagorasExercises, generateThalesExercises];
+  const topics = ['Teorema de Pitágoras', 'Teorema de Tales', 'Ecuaciones de 2do Grado', 'Ley de Senos', 'Ley de Cosenos'];
+  const generators = [generatePythagorasExercises, generateThalesExercises, generateEcuacionesCuadraticasExercises, generateLeySenosExercises, generateLeyCosenosExercises];
 
   for (let i = 0; i < topics.length; i++) {
     const topic = topics[i];
@@ -399,7 +400,10 @@ const CategorySelection = ({ user }) => {
   ];
   const topics3 = [
     { name: 'Teorema de Pitágoras', icon: '🔺', class: 'grad-emerald' },
-    { name: 'Teorema de Tales', icon: '📏', class: 'grad-pink' }
+    { name: 'Teorema de Tales', icon: '📏', class: 'grad-pink' },
+    { name: 'Ecuaciones de 2do Grado', icon: '📈', class: 'grad-purple' },
+    { name: 'Ley de Senos', icon: '📉', class: 'grad-cyan' },
+    { name: 'Ley de Cosenos', icon: '📐', class: 'grad-orange' }
   ];
   const myTopics = user?.grade === '2' ? topics2 : topics3;
 
