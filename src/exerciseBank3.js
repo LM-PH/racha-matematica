@@ -13,14 +13,14 @@ function svgAngulosParalelas(knownPos, knownVal, unknownPos, level = 'easy') {
   // Intersección superior: (130, 80)
   // Intersección inferior: (180, 140)
   const posMap = {
-    1: { x: 105, y: 70 },   // Top-Left (Acute)
-    2: { x: 155, y: 70 },   // Top-Right (Obtuse)
-    3: { x: 105, y: 105 },  // Bottom-Left (Obtuse)
-    4: { x: 155, y: 105 },  // Bottom-Right (Acute)
-    5: { x: 155, y: 130 },  // Top-Left (Acute)
-    6: { x: 205, y: 130 },  // Top-Right (Obtuse)
-    7: { x: 155, y: 165 },  // Bottom-Left (Obtuse)
-    8: { x: 205, y: 165 },  // Bottom-Right (Acute)
+    1: { x: 80, y: 65 },    // Top-Left (Acute)
+    2: { x: 160, y: 65 },   // Top-Right (Obtuse)
+    3: { x: 100, y: 105 },  // Bottom-Left (Obtuse)
+    4: { x: 180, y: 105 },  // Bottom-Right (Acute)
+    5: { x: 130, y: 125 },  // Top-Left (Acute)
+    6: { x: 210, y: 125 },  // Top-Right (Obtuse)
+    7: { x: 150, y: 165 },  // Bottom-Left (Obtuse)
+    8: { x: 230, y: 165 },  // Bottom-Right (Acute)
   };
 
   const labels = {};
