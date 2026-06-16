@@ -18,8 +18,8 @@ function svgGenericTriangle(a, b, c, labels, title) {
   let h = yC;
   if (h === 0) h = 1; 
   
-  const scaleX = 200 / w;
-  const scaleY = 110 / h;
+  const scaleX = 230 / w;
+  const scaleY = 130 / h;
   const scale = Math.min(scaleX, scaleY);
   
   xC *= scale; yC *= scale; 
@@ -47,19 +47,23 @@ function svgGenericTriangle(a, b, c, labels, title) {
 
   const getCol = (val) => (val === 'x' || val === '?' || (typeof val === 'string' && val.includes('?'))) ? '#EF4444' : '#1E293B';
 
+  const getText = (x, y, anchor, val, size = 14) => {
+    return `<text x="${x}" y="${y}" text-anchor="${anchor}" font-family="Arial" font-size="${size}" font-weight="bold" fill="${getCol(val)}" stroke="#F8FAFC" stroke-width="4" paint-order="stroke fill">${val}</text>`;
+  };
+
   return `<svg xmlns="http://www.w3.org/2000/svg" width="310" height="210" viewBox="0 0 310 210">
     <rect width="310" height="210" rx="16" fill="#F8FAFC"/>
     <text x="155" y="25" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold" fill="#475569" letter-spacing="1">${title}</text>
     
     <polygon points="${ptA.x},${ptA.y} ${ptB.x},${ptB.y} ${ptC.x},${ptC.y}" fill="#E0E7FF" stroke="#4F46E5" stroke-width="2.5"/>
     
-    ${labels.c ? `<text x="${midAB.x}" y="${midAB.y}" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="${getCol(labels.c)}">${labels.c}</text>` : ''}
-    ${labels.a ? `<text x="${midBC.x}" y="${midBC.y}" text-anchor="start" font-family="Arial" font-size="14" font-weight="bold" fill="${getCol(labels.a)}">${labels.a}</text>` : ''}
-    ${labels.b ? `<text x="${midCA.x}" y="${midCA.y}" text-anchor="end" font-family="Arial" font-size="14" font-weight="bold" fill="${getCol(labels.b)}">${labels.b}</text>` : ''}
+    ${labels.c ? getText(midAB.x, midAB.y, 'middle', labels.c, 14) : ''}
+    ${labels.a ? getText(midBC.x, midBC.y, 'start', labels.a, 14) : ''}
+    ${labels.b ? getText(midCA.x, midCA.y, 'end', labels.b, 14) : ''}
 
-    ${labels.A ? `<text x="${angA.x}" y="${angA.y}" text-anchor="start" font-family="Arial" font-size="13" fill="${getCol(labels.A)}">${labels.A}</text>` : ''}
-    ${labels.B ? `<text x="${angB.x}" y="${angB.y}" text-anchor="end" font-family="Arial" font-size="13" fill="${getCol(labels.B)}">${labels.B}</text>` : ''}
-    ${labels.C ? `<text x="${angC.x}" y="${angC.y}" text-anchor="middle" font-family="Arial" font-size="13" fill="${getCol(labels.C)}">${labels.C}</text>` : ''}
+    ${labels.A ? getText(angA.x, angA.y, 'start', labels.A, 13) : ''}
+    ${labels.B ? getText(angB.x, angB.y, 'end', labels.B, 13) : ''}
+    ${labels.C ? getText(angC.x, angC.y, 'middle', labels.C, 13) : ''}
     
     <text x="155" y="195" text-anchor="middle" font-family="Arial" font-size="11" fill="#4F46E5" font-style="italic">* Selecciona el resultado más cercano *</text>
   </svg>`;
@@ -147,9 +151,12 @@ export function generateLeySenosExercises() {
   const T = 'Ley de Senos';
 
   for (let i = 0; i < 30; i++) {
-    const A_deg = Math.floor(Math.random() * 80) + 30; 
-    const B_deg = Math.floor(Math.random() * (160 - A_deg)) + 20; 
-    const C_deg = 180 - A_deg - B_deg;
+    let A_deg, B_deg, C_deg;
+    do {
+      A_deg = Math.floor(Math.random() * 60) + 40; 
+      B_deg = Math.floor(Math.random() * 60) + 40; 
+      C_deg = 180 - A_deg - B_deg;
+    } while (C_deg < 40 || C_deg > 100);
 
     const A = A_deg * Math.PI / 180;
     const B = B_deg * Math.PI / 180;
@@ -209,9 +216,12 @@ export function generateLeyCosenosExercises() {
   const T = 'Ley de Cosenos';
 
   for (let i = 0; i < 30; i++) {
-    const A_deg = Math.floor(Math.random() * 80) + 30; 
-    const B_deg = Math.floor(Math.random() * (160 - A_deg)) + 20; 
-    const C_deg = 180 - A_deg - B_deg;
+    let A_deg, B_deg, C_deg;
+    do {
+      A_deg = Math.floor(Math.random() * 60) + 40; 
+      B_deg = Math.floor(Math.random() * 60) + 40; 
+      C_deg = 180 - A_deg - B_deg;
+    } while (C_deg < 40 || C_deg > 100);
 
     const A = A_deg * Math.PI / 180;
     const B = B_deg * Math.PI / 180;

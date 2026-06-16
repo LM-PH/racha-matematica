@@ -12,7 +12,7 @@ import { deleteAllUsers } from './wipeUsers';
 // ======================================================
 //  COLECCIÓN ACTIVA
 // ======================================================
-const EJERCICIOS_COL = 'ejercicios_v7';
+const EJERCICIOS_COL = 'ejercicios_v8';
 
 // ======================================================
 //  SEED — Puebla Firebase con los 80+ ejercicios
