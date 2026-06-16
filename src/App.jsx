@@ -943,8 +943,6 @@ export default function App() {
     const saved = localStorage.getItem('user');
     if (saved) setUser(JSON.parse(saved));
 
-    /* 
-    // Temporariamente desactivado para depurar bloqueo
     const init = async () => {
       try {
         await seedGrade2IfNeeded();
@@ -954,7 +952,6 @@ export default function App() {
       }
     };
     init();
-    */
   }, []);
 
   return (
