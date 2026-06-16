@@ -351,6 +351,25 @@ const Dashboard = ({ user, onUserUpdate }) => {
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          {user?.grade === '2' && (
+            <div style={{ marginTop: '0.5rem', marginBottom: '0.5rem' }}>
+              {user.examen ? (
+                <div style={{ background: '#F1F5F9', padding: '1rem', borderRadius: '1rem', textAlign: 'center', border: '2px solid #E2E8F0' }}>
+                  <div style={{ fontSize: '0.8rem', fontWeight: 800, color: '#64748B' }}>EXAMEN COMPLETADO</div>
+                  <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#10B981' }}>Calificación: {user.examen.score}/10</div>
+                </div>
+              ) : (
+                <button 
+                  className="btn btn-primary" 
+                  style={{ padding: '1.2rem', fontSize: '1.2rem', background: 'linear-gradient(135deg, #F43F5E 0%, #E11D48 100%)', boxShadow: '0 4px 15px rgba(225, 29, 72, 0.4)' }} 
+                  onClick={() => navigate('/exam')}
+                >
+                  📝 TOMAR EXAMEN FINAL
+                </button>
+              )}
+            </div>
+          )}
+
           <button className="btn btn-primary" style={{ padding: '1.2rem', fontSize: '1.2rem' }} onClick={() => navigate('/selection')}>
              🚀 ¡JUGAR AHORA! ➔
           </button>
@@ -862,6 +881,12 @@ const Admin = () => {
                           </div>
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                          {s.examen && (
+                            <div style={{ textAlign: 'right', paddingRight: '0.5rem', borderRight: '1px solid #E2E8F0' }}>
+                              <div style={{ fontSize: '0.8rem', fontWeight: 800, color: '#E11D48' }}>Examen: {s.examen.score}/10</div>
+                              <div style={{ fontSize: '0.55rem', color: '#94A3B8' }}>{new Date(s.examen.timestamp).toLocaleString()}</div>
+                            </div>
+                          )}
                           <div style={{ textAlign: 'right' }}>
                             <div style={{ fontSize: '0.8rem', fontWeight: 800, color: '#4F46E5' }}>🔥 {s.mejor_racha}</div>
                             <div style={{ fontSize: '0.6rem', color: '#94A3B8' }}>Niv. {s.nivel}</div>
@@ -906,6 +931,161 @@ const Results = ({ user }) => {
   );
 };
 
+export const Exam = ({ user, onUserUpdate }) => {
+  const navigate = useNavigate();
+  const [exercises, setExercises] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [answers, setAnswers] = useState([]);
+  const [currentAnswer, setCurrentAnswer] = useState('');
+
+  useEffect(() => {
+    if (!user || user.grade !== '2') {
+      navigate('/dashboard');
+      return;
+    }
+    if (user.examen) {
+      alert('Ya has realizado este examen. No tienes más intentos.');
+      navigate('/dashboard');
+      return;
+    }
+
+    const fetchExamExercises = async () => {
+      try {
+        const topics = ['Sistemas de Ecuaciones 2x2', 'Ángulos entre Paralelas', 'Probabilidad'];
+        const fetched = [];
+        for (const t of topics) {
+          const q = query(collection(db, EJERCICIOS_COL), where('grade', '==', '2'), where('topic', '==', t));
+          const snap = await getDocs(q);
+          if (!snap.empty) {
+            const docs = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+            const randomEx = docs[Math.floor(Math.random() * docs.length)];
+            fetched.push(randomEx);
+          }
+        }
+        if (fetched.length === 3) {
+          setExercises(fetched);
+        } else {
+          alert('Faltan ejercicios en la base de datos para generar el examen.');
+          navigate('/dashboard');
+        }
+      } catch (err) {
+        console.error(err);
+        alert('Error al generar examen');
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchExamExercises();
+  }, [user, navigate]);
+
+  const handleNext = async () => {
+    const isCorrect = parseFloat(currentAnswer) === parseFloat(exercises[currentIndex].answer);
+    const newAnswers = [...answers, isCorrect];
+    setAnswers(newAnswers);
+    setCurrentAnswer('');
+
+    if (currentIndex < 2) {
+      setCurrentIndex(currentIndex + 1);
+    } else {
+      const correctCount = newAnswers.filter(a => a).length;
+      const score = parseFloat(((correctCount / 3) * 10).toFixed(1));
+      
+      const examenData = {
+        score,
+        timestamp: new Date().toISOString(),
+      };
+
+      try {
+        await updateDoc(doc(db, 'usuarios', user.id), { examen: examenData });
+        const updatedUser = { ...user, examen: examenData };
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+        onUserUpdate(updatedUser);
+        navigate('/exam-results');
+      } catch (err) {
+        console.error(err);
+        alert('Error al guardar el examen');
+      }
+    }
+  };
+
+  if (loading) return <div className="app-container"><p style={{padding:'2rem'}}>Generando tu examen único...</p></div>;
+  if (exercises.length === 0) return null;
+
+  const exercise = exercises[currentIndex];
+
+  return (
+    <div className="app-container animate-fade" style={{ background: '#F8FAFC' }}>
+      <div className="stats-bar" style={{ background: '#E11D48' }}>
+        <span>Examen Final</span>
+        <span>Pregunta {currentIndex + 1} / 3</span>
+      </div>
+
+      <div style={{ padding: '1.5rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
+        <div className="glass-card" style={{ flex: 1, display: 'flex', flexDirection: 'column', padding: '1.5rem' }}>
+          <h2 style={{ fontSize: '1.2rem', color: '#1E293B', textAlign: 'center', marginBottom: '1rem' }}>
+            {exercise.topic}
+          </h2>
+
+          <div style={{ background: 'white', padding: '1rem', borderRadius: '1rem', border: '1px solid #E2E8F0', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+             {exercise.svgData ? (
+               <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginBottom: '1rem' }} dangerouslySetInnerHTML={{ __html: exercise.svgData }} />
+             ) : (
+               <p style={{ fontSize: '1.2rem', color: '#334155', textAlign: 'center', marginBottom: '1.5rem', fontWeight: 600 }}>{exercise.question}</p>
+             )}
+             
+             {exercise.svgData && (
+               <p style={{ fontSize: '1.1rem', color: '#334155', textAlign: 'center', marginBottom: '1.5rem', fontWeight: 600 }}>{exercise.question}</p>
+             )}
+
+             <input
+               type="number"
+               className="input-field"
+               placeholder="Tu respuesta..."
+               value={currentAnswer}
+               onChange={e => setCurrentAnswer(e.target.value)}
+               style={{ textAlign: 'center', fontSize: '1.5rem', fontWeight: 700, padding: '1rem' }}
+             />
+          </div>
+        </div>
+
+        <button 
+          className="btn btn-primary" 
+          onClick={handleNext} 
+          disabled={currentAnswer.trim() === ''}
+          style={{ marginTop: '1.5rem', padding: '1.2rem', fontSize: '1.2rem', background: currentIndex === 2 ? '#10B981' : '#4F46E5' }}
+        >
+          {currentIndex === 2 ? 'ENVIAR EXAMEN' : 'SIGUIENTE PREGUNTA ➔'}
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export const ExamResults = ({ user }) => {
+  const navigate = useNavigate();
+  if (!user || !user.examen) return null;
+
+  return (
+    <div className="app-container animate-fade" style={{ background: 'white', justifyContent: 'center' }}>
+      <div className="glass-card" style={{ textAlign: 'center', margin: '2rem' }}>
+        <h2 style={{ color: '#10B981', fontSize: '2.5rem' }}>¡Examen Terminado!</h2>
+        <p style={{ margin: '1rem 0', fontSize: '1.2rem' }}>Has completado tu evaluación final, {user.nickname}.</p>
+        
+        <div style={{ background: '#F1F5F9', padding: '2rem', borderRadius: '1rem', margin: '2rem 0' }}>
+          <div style={{ fontSize: '1rem', color: '#64748B', fontWeight: 800 }}>CALIFICACIÓN FINAL</div>
+          <div style={{ fontSize: '4rem', fontWeight: 900, color: '#0F172A' }}>{user.examen.score}</div>
+          <div style={{ fontSize: '1.2rem', color: '#64748B' }}>sobre 10</div>
+        </div>
+
+        <button className="btn btn-primary" onClick={() => navigate('/dashboard')}>
+          Volver al Inicio
+        </button>
+      </div>
+    </div>
+  );
+};
+
 export default function App() {
   const [user, setUser] = useState(null);
 
@@ -937,6 +1117,8 @@ export default function App() {
         <Route path="/ranking/:type" element={<Ranking user={user} />} />
         <Route path="/results" element={<Results user={user} />} />
         <Route path="/admin-panel-control" element={<Admin />} />
+        <Route path="/exam" element={<Exam user={user} onUserUpdate={setUser} />} />
+        <Route path="/exam-results" element={<ExamResults user={user} />} />
         {/* Catch-all route for any undefined paths */}
         <Route path="*" element={<Home onUserUpdate={setUser} />} />
       </Routes>
