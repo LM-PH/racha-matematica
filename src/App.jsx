@@ -574,36 +574,6 @@ const Game = ({ user, onUserUpdate }) => {
           ENVIAR RESPUESTA
         </button>
 
-        {/* Pista */}
-        {exercise.hint && !feedback && (
-          <button
-            onClick={() => setShowHint(!showHint)}
-            style={{
-              background: 'transparent',
-              border: '1px dashed #94A3B8',
-              borderRadius: '0.75rem',
-              padding: '0.5rem',
-              color: '#64748B',
-              fontSize: '0.85rem',
-              cursor: 'pointer'
-            }}
-          >
-            {showHint ? '🙈 Ocultar pista' : '💡 Ver pista'}
-          </button>
-        )}
-        {showHint && exercise.hint && (
-          <div style={{
-            background: '#FEF9C3',
-            borderRadius: '0.75rem',
-            padding: '0.75rem',
-            fontSize: '0.85rem',
-            color: '#854D0E',
-            textAlign: 'center'
-          }}>
-            💡 {exercise.hint}
-          </div>
-        )}
-
         {/* Feedback */}
         {feedback === 'correct' && (
           <div className="feedback-area feedback-correct" style={{ display: 'block' }}>
