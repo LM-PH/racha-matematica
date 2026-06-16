@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate, Link, useParams, useLocation } from 'react-router-dom';
 import { db } from './firebase';
-import { collection, addDoc, getDocs, query, where, updateDoc, doc, orderBy, limit, deleteDoc } from 'firebase/firestore';
+import { collection, addDoc, getDocs, query, where, updateDoc, doc, orderBy, limit, deleteDoc, writeBatch } from 'firebase/firestore';
 import { Flame, Brain, Trophy, ArrowLeft, Send, Share2, Home as HomeIcon, LogOut, ChevronRight, Volume2, VolumeX, ShieldCheck, Trash2 } from 'lucide-react';
 import { generatePythagorasExercises, generateThalesExercises } from './exerciseBank';
 import { generateEcuaciones1Exercises, generateJerarquiaExercises, generateSistemas2x2Exercises } from './exerciseBank2';
@@ -32,13 +32,15 @@ async function seedGrade3IfNeeded() {
 
     if (snap.size < 30) {
       console.log(`🌱 Sembrando ${topic}…`);
-      // Eliminar viejos si hay pocos
-      for (const d of snap.docs) await deleteDoc(doc(db, EJERCICIOS_COL, d.id));
+      const batch = writeBatch(db);
+      for (const d of snap.docs) batch.delete(doc(db, EJERCICIOS_COL, d.id));
 
       const exercises = generators[i]();
       for (const ex of exercises) {
-        await addDoc(collection(db, EJERCICIOS_COL), { ...ex, createdAt: new Date() });
+        const newRef = doc(collection(db, EJERCICIOS_COL));
+        batch.set(newRef, { ...ex, createdAt: new Date() });
       }
+      await batch.commit();
       console.log(`✅ ${exercises.length} ejercicios de ${topic} guardados.`);
     } else {
       console.log(`✅ ${topic}: ${snap.size} ejercicios ya existen.`);
@@ -76,11 +78,15 @@ async function seedGrade2IfNeeded() {
 
     if (snap.size < 30) {
       console.log(`🌱 Sembrando ${topic}…`);
-      for (const d of snap.docs) await deleteDoc(doc(db, EJERCICIOS_COL, d.id));
+      const batch = writeBatch(db);
+      for (const d of snap.docs) batch.delete(doc(db, EJERCICIOS_COL, d.id));
+      
       const exercises = generators[i]();
       for (const ex of exercises) {
-        await addDoc(collection(db, EJERCICIOS_COL), { ...ex, createdAt: new Date() });
+        const newRef = doc(collection(db, EJERCICIOS_COL));
+        batch.set(newRef, { ...ex, createdAt: new Date() });
       }
+      await batch.commit();
       console.log(`✅ ${exercises.length} ejercicios de ${topic} guardados.`);
     } else {
       console.log(`✅ ${topic}: ${snap.size} ejercicios ya existen.`);
