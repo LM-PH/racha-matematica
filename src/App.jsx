@@ -981,6 +981,7 @@ export const Exam = ({ user, onUserUpdate }) => {
   const [loading, setLoading] = useState(true);
   const [answers, setAnswers] = useState([]);
   const [currentAnswer, setCurrentAnswer] = useState('');
+  const [isExamStarted, setIsExamStarted] = useState(false);
 
   useEffect(() => {
     if (!user) {
@@ -1034,7 +1035,7 @@ export const Exam = ({ user, onUserUpdate }) => {
   }, [user, navigate]);
 
   useEffect(() => {
-    if (!user) return;
+    if (!user || !isExamStarted) return;
 
     window.history.pushState(null, '', window.location.href);
 
@@ -1099,6 +1100,34 @@ export const Exam = ({ user, onUserUpdate }) => {
 
   if (loading) return <div className="app-container"><p style={{padding:'2rem'}}>Generando tu examen único...</p></div>;
   if (exercises.length === 0) return null;
+
+  if (!isExamStarted) {
+    return (
+      <div className="app-container animate-fade" style={{ background: '#F8FAFC', justifyContent: 'center' }}>
+        <div className="glass-card" style={{ padding: '2rem', maxWidth: '500px', margin: '0 auto', textAlign: 'center' }}>
+          <h2 style={{ fontSize: '1.8rem', color: '#E11D48', marginBottom: '1rem' }}>📋 Instrucciones del Examen</h2>
+          
+          <div style={{ textAlign: 'left', marginBottom: '2rem', color: '#334155', fontSize: '1.05rem', lineHeight: '1.6' }}>
+            <p><strong>1. Único Intento:</strong> Este examen solo se puede presentar una vez. Al terminar, tu calificación quedará registrada.</p>
+            <p><strong>2. Material:</strong> Te recomendamos tener a la mano tu libreta, lápiz y calculadora antes de iniciar.</p>
+            <p style={{ color: '#E11D48', fontWeight: 700, marginTop: '1rem', borderLeft: '4px solid #E11D48', paddingLeft: '1rem' }}>
+              🚨 REGLA ANTI-TRAMPA:<br/>
+              Una vez que inicies el examen, NO puedes presionar el botón de regresar ni recargar la página. Si intentas salir o regresar para cambiar las preguntas, el sistema te evaluará automáticamente con un 0 irreversible.
+            </p>
+          </div>
+
+          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexDirection: 'column' }}>
+            <button className="btn btn-primary" style={{ background: '#10B981', padding: '1rem', fontSize: '1.1rem' }} onClick={() => setIsExamStarted(true)}>
+              ✅ ESTOY LISTO, COMENZAR
+            </button>
+            <button className="btn btn-outline" onClick={() => navigate('/dashboard')}>
+              Aún no estoy listo (Volver)
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   const exercise = exercises[currentIndex];
 
