@@ -54,8 +54,8 @@ function svgGenericTriangle(a, b, c, labels, title) {
     <polygon points="${ptA.x},${ptA.y} ${ptB.x},${ptB.y} ${ptC.x},${ptC.y}" fill="#E0E7FF" stroke="#4F46E5" stroke-width="2.5"/>
     
     ${labels.c ? `<text x="${midAB.x}" y="${midAB.y}" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="${getCol(labels.c)}">${labels.c}</text>` : ''}
-    ${labels.a ? `<text x="${midBC.x}" y="${midBC.y}" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="${getCol(labels.a)}">${labels.a}</text>` : ''}
-    ${labels.b ? `<text x="${midCA.x}" y="${midCA.y}" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="${getCol(labels.b)}">${labels.b}</text>` : ''}
+    ${labels.a ? `<text x="${midBC.x}" y="${midBC.y}" text-anchor="start" font-family="Arial" font-size="14" font-weight="bold" fill="${getCol(labels.a)}">${labels.a}</text>` : ''}
+    ${labels.b ? `<text x="${midCA.x}" y="${midCA.y}" text-anchor="end" font-family="Arial" font-size="14" font-weight="bold" fill="${getCol(labels.b)}">${labels.b}</text>` : ''}
 
     ${labels.A ? `<text x="${angA.x}" y="${angA.y}" text-anchor="start" font-family="Arial" font-size="13" fill="${getCol(labels.A)}">${labels.A}</text>` : ''}
     ${labels.B ? `<text x="${angB.x}" y="${angB.y}" text-anchor="end" font-family="Arial" font-size="13" fill="${getCol(labels.B)}">${labels.B}</text>` : ''}
@@ -223,29 +223,13 @@ export function generateLeyCosenosExercises() {
 
     const displayA = parseFloat(exactA.toFixed(1));
     const displayB = parseFloat(exactB.toFixed(1));
-    const displayC = exactC; 
 
-    const isFindingSide = Math.random() > 0.5;
-
-    let labels = {};
-    let exactAnswer;
-    let questionText = '';
-
-    if (isFindingSide) {
-      labels = { a: `${displayA}`, b: `${displayB}`, C: `${C_deg}°`, c: 'x' };
-      // c^2 = a^2 + b^2 - 2ab cos(C)
-      const cSq = displayA*displayA + displayB*displayB - 2*displayA*displayB*Math.cos(C);
-      exactAnswer = Math.sqrt(Math.max(0, cSq));
-      questionText = 'Utiliza la Ley de Cosenos para calcular el lado x.';
-    } else {
-      labels = { a: `${displayA}`, b: `${displayB}`, c: `${displayC}`, C: 'x°' };
-      // cos(C) = (a^2+b^2-c^2) / 2ab
-      let val = (displayA*displayA + displayB*displayB - displayC*displayC) / (2*displayA*displayB);
-      if (val > 1) val = 1;
-      if (val < -1) val = -1;
-      exactAnswer = Math.acos(val) * 180 / Math.PI;
-      questionText = 'Utiliza la Ley de Cosenos para calcular el ángulo x.';
-    }
+    let labels = { a: `${displayA}`, b: `${displayB}`, C: `${C_deg}°`, c: 'x' };
+    
+    // c^2 = a^2 + b^2 - 2ab cos(C)
+    const cSq = displayA*displayA + displayB*displayB - 2*displayA*displayB*Math.cos(C);
+    let exactAnswer = Math.sqrt(Math.max(0, cSq));
+    let questionText = 'Utiliza la Ley de Cosenos para calcular el lado x.';
 
     const options = generateOptions(exactAnswer);
     const formattedAnswer = parseFloat(exactAnswer.toFixed(1));
@@ -253,7 +237,7 @@ export function generateLeyCosenosExercises() {
     exercises.push({
       grade: G,
       topic: T,
-      subtype: isFindingSide ? 'find_side' : 'find_angle',
+      subtype: 'find_side',
       difficulty: 3,
       question: questionText,
       svgData: svgGenericTriangle(exactA, exactB, exactC, labels, 'LEY DE COSENOS'),
