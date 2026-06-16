@@ -996,15 +996,13 @@ export const Exam = ({ user, onUserUpdate }) => {
     const fetchExamExercises = async () => {
       try {
         let topics = [];
-        let itemsPerTopic = 1;
         if (user.grade === '2') {
           topics = ['Sistemas de Ecuaciones 2x2', 'Ángulos entre Paralelas', 'Probabilidad'];
-          itemsPerTopic = 1;
         } else {
-          topics = ['Teorema de Pitágoras', 'Teorema de Tales', 'Ecuaciones de 2do Grado', 'Ley de Senos', 'Ley de Cosenos'];
-          itemsPerTopic = 2;
+          const allTopics3 = ['Teorema de Pitágoras', 'Teorema de Tales', 'Ecuaciones de 2do Grado', 'Ley de Senos', 'Ley de Cosenos'];
+          topics = allTopics3.sort(() => 0.5 - Math.random()).slice(0, 2);
         }
-        const expectedCount = topics.length * itemsPerTopic;
+        const expectedCount = topics.length;
 
         const fetched = [];
         for (const t of topics) {
@@ -1012,12 +1010,10 @@ export const Exam = ({ user, onUserUpdate }) => {
           const snap = await getDocs(q);
           if (!snap.empty) {
             const docs = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-            for (let k = 0; k < itemsPerTopic; k++) {
-              if (docs.length > 0) {
-                const randIndex = Math.floor(Math.random() * docs.length);
-                const randomEx = docs.splice(randIndex, 1)[0];
-                fetched.push(randomEx);
-              }
+            if (docs.length > 0) {
+              const randIndex = Math.floor(Math.random() * docs.length);
+              const randomEx = docs.splice(randIndex, 1)[0];
+              fetched.push(randomEx);
             }
           }
         }
