@@ -5,6 +5,7 @@ import { collection, addDoc, getDocs, query, where, updateDoc, doc, orderBy, lim
 import { Flame, Brain, Trophy, ArrowLeft, Send, Share2, Home as HomeIcon, LogOut, ChevronRight, Volume2, VolumeX, ShieldCheck, Trash2 } from 'lucide-react';
 import { generatePythagorasExercises, generateThalesExercises } from './exerciseBank';
 import { generateEcuaciones1Exercises, generateJerarquiaExercises, generateSistemas2x2Exercises } from './exerciseBank2';
+import { generateAngulosParalelasExercises, generateProbabilidadExercises } from './exerciseBank3';
 import { deleteAllUsers } from './wipeUsers';
 
 // ======================================================
@@ -52,11 +53,15 @@ async function seedGrade2IfNeeded() {
     'Ecuaciones de 1er Grado',
     'Jerarquía de Operaciones',
     'Sistemas de Ecuaciones 2x2',
+    'Ángulos entre Paralelas',
+    'Probabilidad'
   ];
   const generators = [
     generateEcuaciones1Exercises,
     generateJerarquiaExercises,
     generateSistemas2x2Exercises,
+    generateAngulosParalelasExercises,
+    generateProbabilidadExercises
   ];
 
   for (let i = 0; i < topics.length; i++) {
@@ -369,7 +374,9 @@ const CategorySelection = ({ user }) => {
   const topics2 = [
     { name: 'Ecuaciones de 1er Grado', icon: '➕', class: 'grad-purple' },
     { name: 'Jerarquía de Operaciones', icon: '📐', class: 'grad-orange' },
-    { name: 'Sistemas de Ecuaciones 2x2', icon: '🔗', class: 'grad-cyan' }
+    { name: 'Sistemas de Ecuaciones 2x2', icon: '🔗', class: 'grad-cyan' },
+    { name: 'Ángulos entre Paralelas', icon: '📏', class: 'grad-emerald' },
+    { name: 'Probabilidad', icon: '🎲', class: 'grad-pink' }
   ];
   const topics3 = [
     { name: 'Teorema de Pitágoras', icon: '🔺', class: 'grad-emerald' },
