@@ -12,7 +12,7 @@ import { deleteAllUsers } from './wipeUsers';
 // ======================================================
 //  COLECCIÓN ACTIVA
 // ======================================================
-const EJERCICIOS_COL = 'ejercicios_v5';
+const EJERCICIOS_COL = 'ejercicios_v6';
 
 // ======================================================
 //  SEED — Puebla Firebase con los 80+ ejercicios
@@ -576,17 +576,42 @@ const Game = ({ user, onUserUpdate }) => {
         )}
 
         {/* Input de respuesta */}
-        <input
-          className="input-field"
-          style={{ fontSize: '1.5rem', textAlign: 'center' }}
-          type="number"
-          placeholder="Tu respuesta"
-          value={answer}
-          onChange={e => setAnswer(e.target.value)}
-          onKeyDown={handleKeyDown}
-          autoFocus
-          disabled={!!feedback}
-        />
+        {exercise?.options ? (
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.8rem' }}>
+            {exercise.options.map((opt, i) => (
+              <button 
+                key={i} 
+                onClick={() => setAnswer(String(opt))}
+                disabled={!!feedback}
+                style={{
+                  padding: '1rem',
+                  fontSize: '1.2rem',
+                  fontWeight: 700,
+                  borderRadius: '0.75rem',
+                  border: answer === String(opt) ? '3px solid #4F46E5' : '3px solid #E2E8F0',
+                  background: answer === String(opt) ? '#EEF2FF' : 'white',
+                  color: '#1E293B',
+                  cursor: feedback ? 'not-allowed' : 'pointer',
+                  transition: 'all 0.2s'
+                }}
+              >
+                {opt}
+              </button>
+            ))}
+          </div>
+        ) : (
+          <input
+            className="input-field"
+            style={{ fontSize: '1.5rem', textAlign: 'center' }}
+            type="number"
+            placeholder="Tu respuesta"
+            value={answer}
+            onChange={e => setAnswer(e.target.value)}
+            onKeyDown={handleKeyDown}
+            autoFocus
+            disabled={!!feedback}
+          />
+        )}
 
         <button
           className="btn btn-primary"
