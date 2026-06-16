@@ -1033,6 +1033,40 @@ export const Exam = ({ user, onUserUpdate }) => {
     fetchExamExercises();
   }, [user, navigate]);
 
+  useEffect(() => {
+    if (!user) return;
+
+    window.history.pushState(null, '', window.location.href);
+
+    const handlePopState = (e) => {
+      const confirmLeave = window.confirm("🚨 ¡ADVERTENCIA! 🚨\nSi sales o regresas en medio del examen, tu calificación se registrará automáticamente como 0. ¿Deseas abandonar el examen?");
+      if (confirmLeave) {
+        const examenData = { score: 0, timestamp: new Date().toISOString() };
+        updateDoc(doc(db, 'usuarios', user.id), { examen: examenData }).catch(console.error);
+        const updatedUser = { ...user, examen: examenData };
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+        if (onUserUpdate) onUserUpdate(updatedUser);
+        
+        window.location.href = '/dashboard';
+      } else {
+        window.history.pushState(null, '', window.location.href);
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+
+    const handleBeforeUnload = (e) => {
+      e.preventDefault();
+      e.returnValue = "Si sales de esta página sacarás 0 en tu examen.";
+    };
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [user, onUserUpdate]);
+
   const handleNext = async () => {
     const isCorrect = parseFloat(currentAnswer) === parseFloat(exercises[currentIndex].answer);
     const newAnswers = [...answers, isCorrect];
