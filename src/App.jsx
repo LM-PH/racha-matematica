@@ -7,6 +7,7 @@ import { generatePythagorasExercises, generateThalesExercises } from './exercise
 import { generateEcuaciones1Exercises, generateJerarquiaExercises, generateSistemas2x2Exercises } from './exerciseBank2';
 import { generateAngulosParalelasExercises, generateProbabilidadExercises } from './exerciseBank3';
 import { generateEcuacionesCuadraticasExercises, generateLeySenosExercises, generateLeyCosenosExercises } from './exerciseBank4';
+import { generateMedidasTendenciaCentralExercises, generateIntroduccionAlgebraExercises, generateLenguajeAlgebraico2x2Exercises, generateFuncionesExercises } from './exerciseBank5';
 import { deleteAllUsers } from './wipeUsers';
 
 // ======================================================
@@ -18,8 +19,24 @@ const EJERCICIOS_COL = 'ejercicios_v8';
 //  SEED — Puebla Firebase con los 80+ ejercicios
 // ======================================================
 async function seedGrade3IfNeeded() {
-  const topics = ['Teorema de Pitágoras', 'Teorema de Tales', 'Ecuaciones de 2do Grado', 'Ley de Senos', 'Ley de Cosenos'];
-  const generators = [generatePythagorasExercises, generateThalesExercises, generateEcuacionesCuadraticasExercises, generateLeySenosExercises, generateLeyCosenosExercises];
+  const topics = [
+    'Teorema de Pitágoras',
+    'Teorema de Tales',
+    'Ecuaciones de 2do Grado',
+    'Ley de Senos',
+    'Ley de Cosenos',
+    'Lenguaje algebraico para ecuaciones 2x2',
+    'Funciones'
+  ];
+  const generators = [
+    generatePythagorasExercises,
+    generateThalesExercises,
+    generateEcuacionesCuadraticasExercises,
+    generateLeySenosExercises,
+    generateLeyCosenosExercises,
+    generateLenguajeAlgebraico2x2Exercises,
+    generateFuncionesExercises
+  ];
 
   for (let i = 0; i < topics.length; i++) {
     const topic = topics[i];
@@ -57,14 +74,18 @@ async function seedGrade2IfNeeded() {
     'Jerarquía de Operaciones',
     'Sistemas de Ecuaciones 2x2',
     'Ángulos entre Paralelas',
-    'Probabilidad'
+    'Probabilidad',
+    'Medidas de tendencia central',
+    'Introducción al álgebra'
   ];
   const generators = [
     generateEcuaciones1Exercises,
     generateJerarquiaExercises,
     generateSistemas2x2Exercises,
     generateAngulosParalelasExercises,
-    generateProbabilidadExercises
+    generateProbabilidadExercises,
+    generateMedidasTendenciaCentralExercises,
+    generateIntroduccionAlgebraExercises
   ];
 
   for (let i = 0; i < topics.length; i++) {
@@ -400,14 +421,20 @@ const CategorySelection = ({ user }) => {
     { name: 'Jerarquía de Operaciones', icon: '📐', class: 'grad-orange' },
     { name: 'Sistemas de Ecuaciones 2x2', icon: '🔗', class: 'grad-cyan' },
     { name: 'Ángulos entre Paralelas', icon: '📏', class: 'grad-emerald' },
-    { name: 'Probabilidad', icon: '🎲', class: 'grad-pink' }
+    { name: 'Probabilidad', icon: '🎲', class: 'grad-pink' },
+    { name: 'Medidas de tendencia central', icon: '📊', class: 'grad-violet' },
+    { name: 'Introducción al álgebra', icon: '✏️', class: 'grad-blue' },
+    { name: 'Entrenamiento aleatorio', icon: '⚡', class: 'grad-dark' }
   ];
   const topics3 = [
     { name: 'Teorema de Pitágoras', icon: '🔺', class: 'grad-emerald' },
     { name: 'Teorema de Tales', icon: '📏', class: 'grad-pink' },
     { name: 'Ecuaciones de 2do Grado', icon: '📈', class: 'grad-purple' },
     { name: 'Ley de Senos', icon: '📉', class: 'grad-cyan' },
-    { name: 'Ley de Cosenos', icon: '📐', class: 'grad-orange' }
+    { name: 'Ley de Cosenos', icon: '📐', class: 'grad-orange' },
+    { name: 'Lenguaje algebraico para ecuaciones 2x2', icon: '📝', class: 'grad-amber' },
+    { name: 'Funciones', icon: '📈', class: 'grad-teal' },
+    { name: 'Entrenamiento aleatorio', icon: '⚡', class: 'grad-dark' }
   ];
   const myTopics = user?.grade === '2' ? topics2 : topics3;
 
@@ -456,11 +483,16 @@ const Game = ({ user, onUserUpdate }) => {
     if (!user) { navigate('/'); return; }
     const loadAll = async () => {
       setLoading(true);
-      const q = query(
-        collection(db, EJERCICIOS_COL),
-        where('grade', '==', user.grade),
-        where('topic', '==', topic)
-      );
+      const q = topic === 'Entrenamiento aleatorio'
+        ? query(
+            collection(db, EJERCICIOS_COL),
+            where('grade', '==', user.grade)
+          )
+        : query(
+            collection(db, EJERCICIOS_COL),
+            where('grade', '==', user.grade),
+            where('topic', '==', topic)
+          );
       const snap = await getDocs(q);
       if (snap.empty) {
         alert('No hay ejercicios para este tema aún.');
@@ -493,9 +525,11 @@ const Game = ({ user, onUserUpdate }) => {
 
   const handleAnswer = async () => {
     if (!answer.trim()) return;
-    const userAnswer = parseFloat(answer);
-    const correctAnswer = parseFloat(exercise.answer);
-    const isCorrect = Math.abs(userAnswer - correctAnswer) < 0.5; // tolerancia de 0.5
+    const uAns = parseFloat(answer);
+    const cAns = parseFloat(exercise.answer);
+    const isCorrect = (isNaN(uAns) || isNaN(cAns))
+      ? answer.trim().toLowerCase() === String(exercise.answer).trim().toLowerCase()
+      : Math.abs(uAns - cAns) < 0.5; // tolerancia de 0.5
 
     setFeedback(isCorrect ? 'correct' : 'incorrect');
 
@@ -998,10 +1032,27 @@ export const Exam = ({ user, onUserUpdate }) => {
       try {
         let topics = [];
         if (user.grade === '2') {
-          topics = ['Sistemas de Ecuaciones 2x2', 'Ángulos entre Paralelas', 'Probabilidad'];
+          const allTopics2 = [
+            'Ecuaciones de 1er Grado',
+            'Jerarquía de Operaciones',
+            'Sistemas de Ecuaciones 2x2',
+            'Ángulos entre Paralelas',
+            'Probabilidad',
+            'Medidas de tendencia central',
+            'Introducción al álgebra'
+          ];
+          topics = allTopics2.sort(() => 0.5 - Math.random()).slice(0, 4);
         } else {
-          const allTopics3 = ['Teorema de Pitágoras', 'Teorema de Tales', 'Ecuaciones de 2do Grado', 'Ley de Senos', 'Ley de Cosenos'];
-          topics = allTopics3.sort(() => 0.5 - Math.random()).slice(0, 2);
+          const allTopics3 = [
+            'Teorema de Pitágoras',
+            'Teorema de Tales',
+            'Ecuaciones de 2do Grado',
+            'Ley de Senos',
+            'Ley de Cosenos',
+            'Lenguaje algebraico para ecuaciones 2x2',
+            'Funciones'
+          ];
+          topics = allTopics3.sort(() => 0.5 - Math.random()).slice(0, 4);
         }
         const expectedCount = topics.length;
 
@@ -1069,7 +1120,12 @@ export const Exam = ({ user, onUserUpdate }) => {
   }, [user, onUserUpdate]);
 
   const handleNext = async () => {
-    const isCorrect = parseFloat(currentAnswer) === parseFloat(exercises[currentIndex].answer);
+    const uAns = parseFloat(currentAnswer);
+    const cAns = parseFloat(exercises[currentIndex].answer);
+    const isCorrect = (isNaN(uAns) || isNaN(cAns))
+      ? currentAnswer.trim().toLowerCase() === String(exercises[currentIndex].answer).trim().toLowerCase()
+      : Math.abs(uAns - cAns) < 0.5;
+
     const newAnswers = [...answers, isCorrect];
     setAnswers(newAnswers);
     setCurrentAnswer('');
